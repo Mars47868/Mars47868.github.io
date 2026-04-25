@@ -1,0 +1,119 @@
+---
+import { ClientRouter } from 'astro:transitions';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description = '我幫你把每天重複做的事，變成自動跑的系統。',
+  ogImage = '/og-default.png',
+} = Astro.props;
+
+const siteUrl = 'https://marschen.dev';
+---
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" />
+    <ClientRouter />
+  </head>
+  <body>
+    <nav class="nav">
+      <div class="container nav__inner">
+        <a href="/" class="nav__logo">Mars Chen</a>
+        <ul class="nav__links">
+          <li><a href="/#projects">作品</a></li>
+          <li><a href="/about">關於我</a></li>
+          <li><a href="/contact" class="nav__cta">聯絡我</a></li>
+        </ul>
+      </div>
+    </nav>
+    <main>
+      <slot />
+    </main>
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 Mars Chen · <a href="https://github.com/marschen82" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  @import '../styles/global.css';
+
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav__logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--color-text);
+  }
+
+  .nav__links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav__links a {
+    color: var(--color-text-muted);
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .nav__links a:hover {
+    color: var(--color-text);
+  }
+
+  .nav__cta {
+    background-color: var(--color-accent);
+    color: var(--color-text) !important;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-md);
+    font-weight: 500;
+  }
+
+  .nav__cta:hover {
+    background-color: var(--color-accent-hover) !important;
+    color: var(--color-text) !important;
+  }
+
+  .footer {
+    padding: 2rem 0;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+</style>
