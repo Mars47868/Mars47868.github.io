@@ -1,0 +1,41 @@
+---
+import TagPill from './TagPill.astro';
+
+interface Props {
+  title: string;
+  summary: string;
+  metric: string;
+  industry: string[];
+  tech: string[];
+  slug: string;
+  github?: string;
+}
+
+const { title, summary, metric, industry, tech, slug, github } = Astro.props;
+---
+<article class="group relative bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:border-primary dark:hover:border-primary hover:shadow-lg transition-all duration-200">
+  <a href={`/projects/${slug}`} class="block">
+    <p class="text-2xl font-bold text-primary mb-1">{metric}</p>
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+      {title}
+    </h3>
+    <p class="text-sm text-gray-600 dark:text-slate-400 mb-4 leading-relaxed">
+      {summary}
+    </p>
+    <div class="flex flex-wrap gap-1.5">
+      {industry.map(i => <TagPill label={i} variant="industry" />)}
+      {tech.map(t => <TagPill label={t} variant="tech" />)}
+    </div>
+  </a>
+  {github && (
+    <a
+      href={github}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${title} GitHub 連結`}
+      class="absolute top-5 right-5 text-xs text-gray-400 dark:text-slate-500 hover:text-primary transition-colors"
+    >
+      GitHub →
+    </a>
+  )}
+</article>
