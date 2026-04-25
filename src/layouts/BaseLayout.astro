@@ -1,5 +1,6 @@
 ---
 import { ClientRouter } from 'astro:transitions';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -25,7 +26,11 @@ const siteUrl = 'https://marschen.dev';
     <meta property="og:description" content={description} />
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
     <meta property="og:type" content="website" />
+    <meta property="og:url" content={`${siteUrl}${Astro.url.pathname}`} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -56,8 +61,6 @@ const siteUrl = 'https://marschen.dev';
 </html>
 
 <style is:global>
-  @import '../styles/global.css';
-
   .nav {
     position: sticky;
     top: 0;
@@ -86,27 +89,29 @@ const siteUrl = 'https://marschen.dev';
     list-style: none;
   }
 
-  .nav__links a {
+  .nav__links a:not(.nav__cta) {
     color: var(--color-text-muted);
     font-size: 0.95rem;
     transition: color 0.2s;
   }
 
-  .nav__links a:hover {
+  .nav__links a:not(.nav__cta):hover {
     color: var(--color-text);
   }
 
   .nav__cta {
     background-color: var(--color-accent);
-    color: var(--color-text) !important;
+    color: var(--color-text);
     padding: 0.4rem 1rem;
     border-radius: var(--radius-md);
     font-weight: 500;
+    font-size: 0.95rem;
+    transition: background-color 0.2s;
   }
 
   .nav__cta:hover {
-    background-color: var(--color-accent-hover) !important;
-    color: var(--color-text) !important;
+    background-color: var(--color-accent-hover);
+    color: var(--color-text);
   }
 
   .footer {
