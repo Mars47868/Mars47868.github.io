@@ -7,7 +7,7 @@ import TagPill from '../components/TagPill.astro';
 import CTABlock from '../components/CTABlock.astro';
 
 const projects = await getCollection('projects');
-const sorted = projects.sort((a, b) => a.data.order - b.data.order);
+const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
 
 const globalTech = ['Python', 'Java', 'Google Apps Script', 'Excel VBA', 'AI 整合', 'Spring Boot'];
 ---
