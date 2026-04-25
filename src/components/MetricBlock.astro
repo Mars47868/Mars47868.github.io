@@ -1,0 +1,22 @@
+---
+interface Props {
+  metric: string;
+  percentage?: number;
+  label?: string;
+}
+const { metric, percentage = 70, label = '節省作業時間' } = Astro.props;
+---
+<div class="bg-gray-50 dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 rounded-2xl p-8 text-center my-8">
+  <p class="text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-slate-400 mb-4">
+    {label}
+  </p>
+  <div class="w-full bg-gray-200 dark:bg-slate-700 rounded-full h-2 mb-6 overflow-hidden">
+    <div
+      class="bg-primary h-2 rounded-full transition-all duration-700"
+      style={`width: ${percentage}%`}
+    ></div>
+  </div>
+  <p class="text-4xl font-bold text-gray-900 dark:text-white">
+    {metric}
+  </p>
+</div>

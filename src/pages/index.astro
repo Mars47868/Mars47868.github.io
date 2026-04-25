@@ -1,8 +1,23 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TagPill from '../components/TagPill.astro';
+import CTABlock from '../components/CTABlock.astro';
+import MetricBlock from '../components/MetricBlock.astro';
 ---
 <BaseLayout title="Mars Chen | AI × 流程自動化">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 py-12 space-y-8">
+    <div class="flex flex-wrap gap-2">
+      <TagPill label="Python" variant="tech" />
+      <TagPill label="Java" variant="tech" />
+      <TagPill label="餐飲業" variant="industry" />
+      <TagPill label="個人財務" variant="industry" />
+    </div>
+    <MetricBlock metric="節省 55 分鐘／週" percentage={80} label="節省作業時間" />
     <p class="text-gray-500 dark:text-slate-400">首頁建置中</p>
   </div>
+  <CTABlock
+    heading="有類似需求？30 分鐘免費聊"
+    buttonText="聯絡我"
+    buttonHref="/contact"
+  />
 </BaseLayout>
