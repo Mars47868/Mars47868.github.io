@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, summary, industry, tech, metric, github, demo } = project.data;
+const { title, summary, industry, tech, metric, github, demo, metricPercentage, metricLabel } = project.data;
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -99,8 +99,8 @@ const { title, summary, industry, tech, metric, github, demo } = project.data;
     <!-- MetricBlock 成效視覺化 -->
     <MetricBlock
       metric={metric}
-      percentage={70}
-      label="節省作業時間"
+      percentage={metricPercentage ?? 70}
+      label={metricLabel ?? '節省作業時間'}
     />
 
   </article>

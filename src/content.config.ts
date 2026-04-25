@@ -14,6 +14,8 @@ const projects = defineCollection({
     demo: z.url().optional(),
     cover: z.string().min(1).optional(),
     order: z.number(),
+    metricPercentage: z.number().min(0).max(100).optional(),
+    metricLabel: z.string().optional(),
   }),
 });
 
