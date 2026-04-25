@@ -10,9 +10,9 @@ const projects = defineCollection({
     industry: z.array(z.string()),
     tech: z.array(z.string()),
     metric: z.string(),
-    github: z.string().url().optional(),
-    demo: z.string().url().optional(),
-    cover: z.string().optional(),
+    github: z.url().optional(),
+    demo: z.url().optional(),
+    cover: z.string().min(1).optional(),
     order: z.number(),
   }),
 });
