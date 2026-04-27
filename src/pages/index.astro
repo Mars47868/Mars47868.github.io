@@ -4,7 +4,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import TagPill from '../components/TagPill.astro';
-import CTABlock from '../components/CTABlock.astro';
 
 const projects = await getCollection('projects');
 const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
@@ -46,10 +45,4 @@ const globalTech = ['Python', 'Java', 'Google Apps Script', 'Excel VBA', 'AI 整
     </div>
   </section>
 
-  <CTABlock
-    heading="有類似需求？30 分鐘免費聊"
-    buttonText="聯絡我"
-    buttonHref="mailto:marschen82@gmail.com"
-    ariaLabel="傳送 Email 給 Mars Chen"
-  />
 </BaseLayout>
