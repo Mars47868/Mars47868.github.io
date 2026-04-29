@@ -13,13 +13,13 @@ interface Props {
 
 const { title, summary, metric, industry, tech, slug, github } = Astro.props;
 ---
-<article class="group relative bg-white dark:bg-slate-800/50 border border-gray-200 dark:border-slate-700 rounded-2xl p-6 hover:border-primary dark:hover:border-primary hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
+<article class="group relative bg-[var(--aw-color-bg-page)] dark:bg-[rgba(30,26,22,0.6)] border border-[var(--aw-color-border)] rounded-2xl p-6 hover:border-primary dark:hover:border-primary hover:shadow-xl hover:-translate-y-1 transition-all duration-200">
   <a href={`/projects/${slug}`} class="block">
     <p class="text-3xl font-bold text-primary mb-1">{metric}</p>
-    <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-primary transition-colors">
+    <h3 class="text-lg font-semibold text-[#1C1917] dark:text-[#E8E0D8] mb-2 group-hover:text-primary transition-colors">
       {title}
     </h3>
-    <p class="text-sm text-gray-600 dark:text-slate-400 mb-4 leading-relaxed">
+    <p class="text-sm text-[#78716C] dark:text-[#A09590] mb-4 leading-relaxed">
       {summary}
     </p>
     <div class="flex flex-wrap gap-1.5">
@@ -33,7 +33,7 @@ const { title, summary, metric, industry, tech, slug, github } = Astro.props;
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`${title} GitHub 連結`}
-      class="absolute top-5 right-5 text-xs text-gray-400 dark:text-slate-500 hover:text-primary transition-colors"
+      class="absolute top-5 right-5 text-xs text-[#A09590] dark:text-[#6B6460] hover:text-primary transition-colors"
     >
       GitHub →
     </a>
