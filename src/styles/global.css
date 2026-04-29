@@ -20,15 +20,17 @@
   --aw-color-secondary: 1 84 207;
   --aw-color-accent: 109 40 217;
 
-  --aw-color-text-default: rgb(16 16 16);
-  --aw-color-text-muted: rgb(16 16 16 / 66%);
-  --aw-color-bg-page: rgb(255 255 255);
+  --aw-color-text-default: rgb(28 25 23);
+  --aw-color-text-muted: rgb(28 25 23 / 55%);
+  --aw-color-bg-page: rgb(250 250 248);
+  --aw-color-border: rgba(80, 60, 40, 0.09);
 }
 
 .dark {
-  --aw-color-text-default: rgb(229 236 246);
-  --aw-color-text-muted: rgb(229 236 246 / 66%);
-  --aw-color-bg-page: rgb(3 6 32);
+  --aw-color-text-default: rgb(232 224 216);
+  --aw-color-text-muted: rgb(232 224 216 / 55%);
+  --aw-color-bg-page: rgb(20 18 16);
+  --aw-color-border: rgba(255, 240, 220, 0.08);
 }
 
 html {
