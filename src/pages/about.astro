@@ -64,24 +64,24 @@ const techTags = [
   <div class="max-w-3xl mx-auto px-4 sm:px-6">
 
     <!-- 1. 自我介紹區塊 -->
-    <section class="py-12 border-b border-gray-100 dark:border-slate-800">
-      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">
+    <section class="py-12 border-b border-[var(--aw-color-border)]">
+      <h1 class="text-4xl font-bold text-[#1C1917] dark:text-[#E8E0D8] mb-4">
         Mars Chen
       </h1>
       <p class="text-lg font-medium text-primary mb-6 leading-relaxed">
         我幫懂業務但不懂技術的人，把重複的工作變成自動化系統。
       </p>
-      <p class="text-gray-600 dark:text-slate-300 leading-relaxed">
+      <p class="text-[#78716C] dark:text-[#A09590] leading-relaxed">
         我同時理解「問題的業務面」和「解法的技術面」——這是大多數純工程師或純業務人員做不到的事。在成為工程師之前，我在科技公司擔任 Product Manager，負責管理佔公司營收 40% 的核心產品線。那段經歷讓我看到大量可以被自動化的流程，也讓我決定親手去解決它們。
       </p>
     </section>
 
     <!-- 2. 轉職故事 -->
-    <section class="py-12 border-b border-gray-100 dark:border-slate-800">
-      <h2 class="text-xl font-bold mb-6 pb-3 border-b border-gray-100 dark:border-slate-800 text-gray-900 dark:text-white">
+    <section class="py-12 border-b border-[var(--aw-color-border)]">
+      <h2 class="text-xl font-bold mb-6 pb-3 border-b border-[var(--aw-color-border)] text-[#1C1917] dark:text-[#E8E0D8]">
         為什麼從 PM 變成工程師
       </h2>
-      <div class="space-y-5 text-gray-600 dark:text-slate-300 leading-relaxed">
+      <div class="space-y-5 text-[#78716C] dark:text-[#A09590] leading-relaxed">
         <p>
           在亞果元素當 PM 的後期，我開始感覺到一種瓶頸：我能清楚看到問題在哪，也能定義解決方案，但我沒辦法親手把它做出來。每次需要請工程師開發一個工具，從提需求到上線，往往要等好幾個月。
         </p>
@@ -95,24 +95,24 @@ const techTags = [
     </section>
 
     <!-- 3. 工作經歷時間軸 -->
-    <section class="py-12 border-b border-gray-100 dark:border-slate-800">
-      <h2 class="text-xl font-bold mb-6 pb-3 border-b border-gray-100 dark:border-slate-800 text-gray-900 dark:text-white">
+    <section class="py-12 border-b border-[var(--aw-color-border)]">
+      <h2 class="text-xl font-bold mb-6 pb-3 border-b border-[var(--aw-color-border)] text-[#1C1917] dark:text-[#E8E0D8]">
         工作經歷
       </h2>
       <ol aria-label="工作經歷時間軸">
         {timeline.map((item) => (
-          <li class="py-5 border-b border-gray-100 dark:border-slate-800 last:border-b-0 flex flex-col sm:grid sm:grid-cols-[160px_1fr] gap-2 sm:gap-6">
-            <span class="text-xs text-gray-500 dark:text-slate-400 pt-0.5 shrink-0">
+          <li class="py-5 border-b border-[var(--aw-color-border)] last:border-b-0 flex flex-col sm:grid sm:grid-cols-[160px_1fr] gap-2 sm:gap-6">
+            <span class="text-xs text-[#78716C] dark:text-[#A09590] pt-0.5 shrink-0">
               {item.period}
             </span>
             <div>
-              <p class="font-semibold text-gray-900 dark:text-white">
+              <p class="font-semibold text-[#1C1917] dark:text-[#E8E0D8]">
                 {item.role}
               </p>
               <p class="text-sm text-primary mb-2">
                 {item.company}
               </p>
-              <p class="text-sm text-gray-500 dark:text-slate-400 leading-relaxed">
+              <p class="text-sm text-[#78716C] dark:text-[#A09590] leading-relaxed">
                 {item.note}
               </p>
             </div>
@@ -122,8 +122,8 @@ const techTags = [
     </section>
 
     <!-- 4. 技術能力標籤 -->
-    <section class="py-12 border-b border-gray-100 dark:border-slate-800">
-      <h2 class="text-xl font-bold mb-6 pb-3 border-b border-gray-100 dark:border-slate-800 text-gray-900 dark:text-white">
+    <section class="py-12 border-b border-[var(--aw-color-border)]">
+      <h2 class="text-xl font-bold mb-6 pb-3 border-b border-[var(--aw-color-border)] text-[#1C1917] dark:text-[#E8E0D8]">
         技術能力
       </h2>
       <div class="flex flex-wrap gap-2">
