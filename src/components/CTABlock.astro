@@ -1,23 +1,93 @@
 ---
 interface Props {
   heading: string;
-  buttonText: string;
-  buttonHref: string;
-  ariaLabel?: string;
+  desc?: string;
+  email: string;
+  linkedin?: string;
+  github?: string;
 }
-const { heading, buttonText, buttonHref, ariaLabel } = Astro.props;
+const { heading, desc, email, linkedin, github } = Astro.props;
 ---
-<section class="border-t border-[var(--aw-color-border)] py-16 mt-16">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6 text-center">
-    <h2 class="text-2xl font-bold text-[#1C1917] dark:text-[#E8E0D8] mb-6">
-      {heading}
-    </h2>
-    <a
-      href={buttonHref}
-      aria-label={ariaLabel ?? buttonText}
-      class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-secondary transition-colors"
-    >
-      {buttonText}
-    </a>
+<section class="cta-section" id="contact">
+  <div class="cta-block">
+    <h2 class="cta-headline" set:html={heading} />
+    {desc && <p class="cta-desc">{desc}</p>}
+    <div class="cta-links">
+      <a class="cta-btn cta-btn-primary" href={`mailto:${email}`}>
+        寫信給我
+      </a>
+      {linkedin && (
+        <a class="cta-btn cta-btn-secondary" href={linkedin} target="_blank" rel="noopener noreferrer">
+          LinkedIn →
+        </a>
+      )}
+      {github && (
+        <a class="cta-btn cta-btn-secondary" href={github} target="_blank" rel="noopener noreferrer">
+          GitHub →
+        </a>
+      )}
+    </div>
   </div>
 </section>
+
+<style>
+  .cta-section { padding: 2.5rem 0; }
+  .cta-block {
+    border: 0.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .cta-headline {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+  .cta-desc {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 480px;
+  }
+  .cta-links {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+  .cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all var(--transition);
+    cursor: pointer;
+  }
+  .cta-btn-primary {
+    background: var(--color-teal);
+    color: white;
+    border: 1px solid var(--color-teal);
+  }
+  .cta-btn-primary:hover { background: #0D5F4A; border-color: #0D5F4A; }
+  .cta-btn-secondary {
+    background: transparent;
+    color: var(--color-text-secondary);
+    border: 0.5px solid var(--color-border-mid);
+  }
+  .cta-btn-secondary:hover {
+    border-color: var(--color-teal);
+    color: var(--color-teal);
+  }
+  @media (max-width: 600px) {
+    .cta-links { flex-direction: column; }
+    .cta-btn { justify-content: center; }
+  }
+</style>
