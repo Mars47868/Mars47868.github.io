@@ -6,10 +6,27 @@ interface Props {
 const { label, variant = 'tech' } = Astro.props;
 ---
 <span class:list={[
-  'inline-block px-2.5 py-0.5 rounded-full text-xs font-medium whitespace-nowrap',
-  variant === 'tech'
-    ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
-    : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
+  'tag-pill',
+  variant === 'tech' ? 'tag-tech' : 'tag-industry'
 ]}>
   {label}
 </span>
+
+<style>
+  .tag-pill {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-family: var(--font-mono);
+  }
+  .tag-tech {
+    background: var(--color-teal-light);
+    color: var(--color-teal);
+  }
+  .tag-industry {
+    background: var(--color-amber-light);
+    color: var(--color-amber);
+  }
+</style>
