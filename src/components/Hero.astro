@@ -1,27 +1,70 @@
 ---
-const techStack = ['Java 後端', 'Python', 'AI 整合', '流程自動化'];
+const chips = ['後端工程', 'AI 整合', '流程自動化', '產品思維', '全端開發'];
 ---
-<section class="relative py-20 md:py-28">
-  <div class="max-w-5xl mx-auto px-4 sm:px-6">
-    <div class="max-w-3xl">
-      <p class="text-sm font-semibold uppercase tracking-widest text-primary mb-4">
-        AI × 流程自動化
-      </p>
-      <h1 class="text-4xl md:text-5xl font-bold text-[#1C1917] dark:text-[#E8E0D8] leading-tight mb-6">
-        我幫你把每天重複做的事，<br class="hidden sm:block" />
-        <span class="text-primary">變成自動跑的系統。</span>
-      </h1>
-      <p class="text-lg text-[#78716C] dark:text-[#A09590] mb-8">
-        {techStack.join(' × ')}
-      </p>
-      <div class="flex flex-wrap gap-4">
-        <a
-          href="#projects"
-          class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-primary text-white font-semibold hover:bg-secondary transition-colors"
-        >
-          看作品
-        </a>
-      </div>
-    </div>
+<section class="hero">
+  <p class="hero-location">陳睿凱 · Ruei Kai Chen · 台北</p>
+  <h1 class="hero-headline">
+    我找到流程裡的浪費，<br />然後讓它<em>消失</em>。
+  </h1>
+  <p class="hero-sub">
+    橫跨產品管理與後端工程的複合背景，專注於用 AI 與自動化，
+    把重複的人工作業變成可以自己跑的系統。
+  </p>
+  <div class="chips">
+    {chips.map(chip => <span class="chip">{chip}</span>)}
   </div>
 </section>
+
+<style>
+  .hero {
+    padding: 4rem 0 3rem;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .hero-location {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.2rem;
+    font-family: var(--font-mono);
+  }
+  .hero-headline {
+    font-family: var(--font-serif);
+    font-size: 36px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.35;
+    margin-bottom: 1.4rem;
+    letter-spacing: -0.01em;
+  }
+  .hero-headline em {
+    font-style: normal;
+    color: var(--color-teal);
+  }
+  .hero-sub {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 1.6rem;
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-size: 12px;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 0.5px solid var(--color-border-mid);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-secondary);
+    letter-spacing: 0.01em;
+    transition: border-color var(--transition), color var(--transition);
+  }
+  .chip:hover {
+    border-color: var(--color-teal);
+    color: var(--color-teal);
+  }
+  @media (max-width: 600px) {
+    .hero { padding: 2.5rem 0 2rem; }
+    .hero-headline { font-size: 28px; }
+  }
+</style>
