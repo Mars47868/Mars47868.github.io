@@ -1,4 +1,4 @@
-# 作品內容編輯指南
+# 網站內容編輯指南
 
 ## 檔案位置
 
@@ -119,6 +119,79 @@ cover: "projects/aui-cover.png"    # 選填，放在 src/assets/projects/
 - **修改 detail 頁**：改 Markdown 正文
 - **修改標籤**：改 `industry` / `tech` 陣列
 - **調整排序**：改 `order` 數字
+
+---
+
+---
+
+## 修改首頁靜態區塊
+
+以下區塊的文字**直接寫在組件檔裡**，不透過 content collection，直接編輯對應檔案即可。
+
+### Hero（第一屏）
+
+檔案：`src/components/Hero.astro`
+
+可修改：
+- `hero-location`：名字與城市那行小字（`陳睿凱 · Ruei Kai Chen · 台北`）
+- `hero-headline`：身份句（`我找到流程裡的浪費，然後讓它消失。`）
+- `hero-sub`：說明文字
+- `chips` 陣列：能力標籤（`['後端工程', 'AI 整合', ...]`）
+
+---
+
+### 為什麼是我（About）
+
+檔案：`src/components/WhyMeBlock.astro`
+
+可修改：
+- `.about-quote`：引言（serif 大字，teal 色）
+- `.about-body` 的三段 `<p>`：本文段落
+
+---
+
+### 工具箱（Skills）
+
+檔案：`src/components/Toolbox.astro`
+
+修改 frontmatter 裡的 `groups` 陣列：
+
+```js
+const groups = [
+  { label: '後端 / 系統', items: ['Java', 'Spring Boot', ...] },
+  { label: 'AI / 自動化',  items: ['Python', 'OpenAI API', ...] },
+  { label: '前端',         items: ['React', 'Vue', ...] },
+  { label: '產品 / 流程',  items: ['需求訪談', '流程分析', ...] },
+];
+```
+
+---
+
+### 合作 CTA（Contact）
+
+聯絡資訊在 `src/pages/index.astro` 底部的 CTABlock 傳入：
+
+```astro
+<CTABlock
+  heading="你有一個重複在做、<br>但覺得「應該可以更好」的流程嗎？"
+  desc="說明文字..."
+  email="marschen82@gmail.com"
+  linkedin="https://linkedin.com/in/marschen"
+  github="https://github.com/marschen82"
+/>
+```
+
+修改 `email` / `linkedin` / `github` 即可更新連結；`heading` 支援 `<br>` 換行。
+
+---
+
+### Header / Footer
+
+檔案：`src/layouts/BaseLayout.astro`
+
+- **Header 左側品牌名稱**：搜尋 `陳睿凱 Mars`，改為你要的文字
+- **Header 導覽連結**：找 `<nav>` 區塊，修改各 `<a>` 的文字
+- **Footer 文字**：搜尋 `陳睿凱 · Ruei Kai Chen · 台北 · 2026`，依年份更新
 
 ---
 
