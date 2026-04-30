@@ -1,12 +1,10 @@
 @import "tailwindcss";
-@import '@fontsource-variable/inter';
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: rgb(1 97 239);
-  --color-secondary: rgb(1 84 207);
-  --color-accent: rgb(109 40 217);
-  --font-family-sans: "Inter Variable", ui-sans-serif, system-ui, sans-serif;
+  --color-primary:   rgb(15 110 86);
+  --color-secondary: rgb(13 95 74);
+  --font-family-sans: 'Noto Sans TC', ui-sans-serif, system-ui, sans-serif;
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -16,27 +14,46 @@
 }
 
 :root {
-  --aw-color-primary: 1 97 239;
-  --aw-color-secondary: 1 84 207;
-  --aw-color-accent: 109 40 217;
+  --color-bg:              #FAFAF8;
+  --color-bg-secondary:    #F3F2EF;
+  --color-bg-tertiary:     #ECEAE5;
+  --color-text-primary:    #1C1C1A;
+  --color-text-secondary:  #5F5E5A;
+  --color-text-tertiary:   #8F8D88;
+  --color-teal:            #0F6E56;
+  --color-teal-light:      #E1F5EE;
+  --color-teal-mid:        #1D9E75;
+  --color-amber:           #BA7517;
+  --color-amber-light:     #FAEEDA;
+  --color-border:          rgba(28,28,26,0.10);
+  --color-border-mid:      rgba(28,28,26,0.18);
+  --color-before-bg:       #FCEBEB;
+  --color-before-text:     #7A2020;
+  --color-think-bg:        #EBF3FB;
+  --color-think-text:      #1A4A7A;
+  --color-after-bg:        #EAF3DE;
+  --color-after-text:      #2A5A12;
+  --font-serif:  'Noto Serif TC', serif;
+  --font-sans:   'Noto Sans TC', sans-serif;
+  --font-mono:   'JetBrains Mono', monospace;
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --transition:  0.18s ease;
 
-  --aw-color-text-default: rgb(28 25 23);
-  --aw-color-text-muted: rgb(28 25 23 / 55%);
-  --aw-color-bg-page: rgb(250 250 248);
-  --aw-color-border: rgba(80, 60, 40, 0.09);
-}
-
-.dark {
-  --aw-color-text-default: rgb(232 224 216);
-  --aw-color-text-muted: rgb(232 224 216 / 55%);
-  --aw-color-bg-page: rgb(20 18 16);
-  --aw-color-border: rgba(255, 240, 220, 0.08);
+  /* 向後相容別名，讓舊組件在重構前繼續正常 */
+  --aw-color-text-default: var(--color-text-primary);
+  --aw-color-text-muted:   var(--color-text-secondary);
+  --aw-color-bg-page:      var(--color-bg);
+  --aw-color-border:       var(--color-border);
 }
 
 html {
-  font-family: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
-  background-color: var(--aw-color-bg-page);
-  color: var(--aw-color-text-default);
+  font-family: var(--font-sans);
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
+  font-size: 15px;
+  line-height: 1.7;
   scroll-behavior: smooth;
 }
 
@@ -52,16 +69,11 @@ img {
 }
 
 a:focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: 2px solid var(--color-teal);
   outline-offset: 2px;
   border-radius: 2px;
 }
 
 ::selection {
-  background-color: lavender;
-}
-
-.dark ::selection {
-  background-color: black;
-  color: snow;
+  background-color: var(--color-teal-light);
 }
