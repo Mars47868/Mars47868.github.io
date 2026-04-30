@@ -77,3 +77,7 @@ a:focus-visible {
 ::selection {
   background-color: var(--color-teal-light);
 }
+
+section[id] {
+  scroll-margin-top: 64px;
+}

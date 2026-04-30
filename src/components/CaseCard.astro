@@ -7,6 +7,7 @@ interface Props {
   after: string;
   result: string;
   tech: string[];
+  industry?: string[];
   slug: string;
   icon?: string;
   iconBg?: 'green' | 'blue' | 'amber';
@@ -15,12 +16,13 @@ interface Props {
 
 const {
   title, problemLabel, before, think, after, result,
-  tech, slug,
+  tech, industry = [], slug,
   icon = '📦', iconBg = 'green',
   defaultOpen = false,
 } = Astro.props;
 
 const bodyId = `case-body-${slug}`;
+const headerTags = [...industry.slice(0, 2), ...tech.slice(0, 2)];
 ---
 
 <div class:list={['case-card', { open: defaultOpen }]} data-case-card>
@@ -30,6 +32,11 @@ const bodyId = `case-body-${slug}`;
     <div class="case-info">
       {problemLabel && <p class="case-problem">問題 · {problemLabel}</p>}
       <p class="case-title">{title}</p>
+      {headerTags.length > 0 && (
+        <div class="case-tags">
+          {headerTags.map(t => <span class="case-tag">{t}</span>)}
+        </div>
+      )}
     </div>
     <span class="case-toggle" aria-hidden="true">+</span>
   </div>
@@ -105,6 +112,15 @@ const bodyId = `case-body-${slug}`;
     font-weight: 500;
     color: var(--color-text-primary);
     line-height: 1.4;
+  }
+  .case-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .case-tag {
+    font-size: 10px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono);
   }
 
   .case-toggle {
