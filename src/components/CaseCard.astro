@@ -1,0 +1,223 @@
+---
+interface Props {
+  title: string;
+  problemLabel?: string;
+  before: string;
+  think: string;
+  after: string;
+  result: string;
+  tech: string[];
+  slug: string;
+  icon?: string;
+  iconBg?: 'green' | 'blue' | 'amber';
+  defaultOpen?: boolean;
+}
+
+const {
+  title, problemLabel, before, think, after, result,
+  tech, slug,
+  icon = '📦', iconBg = 'green',
+  defaultOpen = false,
+} = Astro.props;
+---
+
+<div class:list={['case-card', { open: defaultOpen }]} data-case-card>
+  <div class="case-header" role="button" tabindex="0" aria-expanded={String(defaultOpen)}>
+    <div class:list={['case-icon', `icon-${iconBg}`]}>{icon}</div>
+    <div class="case-info">
+      {problemLabel && <p class="case-problem">問題 · {problemLabel}</p>}
+      <p class="case-title">{title}</p>
+    </div>
+    <span class="case-toggle" aria-hidden="true">+</span>
+  </div>
+  <div class="case-body">
+    <div class="divider"></div>
+    <div class="journey">
+      <div class="journey-step step-before">
+        <p class="step-label label-before">Before · 之前的痛</p>
+        <p class="step-text">{before}</p>
+      </div>
+      <div class="journey-step step-think">
+        <p class="step-label label-think">Think · 我怎麼想</p>
+        <p class="step-text">{think}</p>
+      </div>
+      <div class="journey-step step-after">
+        <p class="step-label label-after">After · 最後的結果</p>
+        <p class="step-text">{after}</p>
+      </div>
+    </div>
+    <div class="result-bar">
+      <span class="result-icon">✦</span>
+      <p class="result-text"><strong>{result}</strong></p>
+    </div>
+    <div class="tech-row">
+      {tech.map(t => <span class="tech">{t}</span>)}
+    </div>
+    <a href={`/projects/${slug}`} class="detail-link">查看完整案例 →</a>
+  </div>
+</div>
+
+<style>
+  .case-card {
+    background: var(--color-bg);
+    border: 0.5px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: border-color var(--transition);
+  }
+  .case-card:hover { border-color: var(--color-border-mid); }
+  .case-card.open { border-color: var(--color-teal); border-width: 1px; }
+
+  .case-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 1.25rem 1.4rem;
+    cursor: pointer;
+  }
+  .case-icon {
+    width: 38px;
+    height: 38px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .icon-green { background: var(--color-teal-light); }
+  .icon-blue  { background: #E6F1FB; }
+  .icon-amber { background: var(--color-amber-light); }
+
+  .case-info { flex: 1; min-width: 0; }
+  .case-problem {
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+  .case-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+  }
+
+  .case-toggle {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--color-text-tertiary);
+    flex-shrink: 0;
+    transition: transform var(--transition), color var(--transition);
+    margin-top: 6px;
+  }
+  .case-card.open .case-toggle {
+    transform: rotate(45deg);
+    color: var(--color-teal);
+  }
+
+  .case-body {
+    display: none;
+    padding: 0 1.4rem 1.4rem;
+  }
+  .case-card.open .case-body { display: block; }
+
+  .divider {
+    height: 0.5px;
+    background: var(--color-border);
+    margin-bottom: 1.2rem;
+  }
+
+  .journey {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 1.2rem;
+  }
+  .journey-step { padding: 12px 14px; border-radius: var(--radius-md); }
+  .step-before { background: var(--color-before-bg); }
+  .step-think  { background: var(--color-think-bg); }
+  .step-after  { background: var(--color-after-bg); }
+
+  .step-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 7px;
+    font-family: var(--font-mono);
+  }
+  .label-before { color: var(--color-before-text); }
+  .label-think  { color: var(--color-think-text); }
+  .label-after  { color: var(--color-after-text); }
+  .step-text { font-size: 12px; line-height: 1.65; color: var(--color-text-primary); }
+
+  .result-bar {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius-md);
+    padding: 12px 14px;
+    margin-bottom: 1rem;
+  }
+  .result-icon { font-size: 16px; flex-shrink: 0; margin-top: 2px; }
+  .result-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .result-text strong { color: var(--color-text-primary); font-weight: 500; }
+
+  .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
+  .tech {
+    font-size: 11px;
+    padding: 4px 9px;
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-secondary);
+    border: 0.5px solid var(--color-border);
+    color: var(--color-text-secondary);
+    font-family: var(--font-mono);
+  }
+
+  .detail-link {
+    font-size: 12px;
+    color: var(--color-teal);
+    text-decoration: none;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+  }
+  .detail-link:hover { text-decoration: underline; }
+
+  @media (max-width: 600px) {
+    .journey { grid-template-columns: 1fr; }
+  }
+</style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    document.querySelectorAll('[data-case-card]').forEach(card => {
+      const header = card.querySelector('.case-header');
+      if (!header) return;
+      header.addEventListener('click', () => {
+        const isOpen = card.classList.contains('open');
+        document.querySelectorAll('[data-case-card]').forEach(c => {
+          c.classList.remove('open');
+          c.querySelector('.case-header')?.setAttribute('aria-expanded', 'false');
+        });
+        if (!isOpen) {
+          card.classList.add('open');
+          header.setAttribute('aria-expanded', 'true');
+        }
+      });
+      header.addEventListener('keydown', (e: Event) => {
+        const ke = e as KeyboardEvent;
+        if (ke.key === 'Enter' || ke.key === ' ') {
+          ke.preventDefault();
+          (header as HTMLElement).click();
+        }
+      });
+    });
+  });
+</script>
