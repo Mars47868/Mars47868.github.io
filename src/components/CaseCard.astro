@@ -23,6 +23,9 @@ const {
 
 const bodyId = `case-body-${slug}`;
 const headerTags = [...industry.slice(0, 2), ...tech.slice(0, 2)];
+const resultParts = result.split('——');
+const resultBold = resultParts[0];
+const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join('——') : '';
 ---
 
 <div class:list={['case-card', { open: defaultOpen }]} data-case-card>
@@ -58,7 +61,7 @@ const headerTags = [...industry.slice(0, 2), ...tech.slice(0, 2)];
     </div>
     <div class="result-bar">
       <span class="result-icon">✦</span>
-      <p class="result-text">{result}</p>
+      <p class="result-text"><strong>{resultBold}</strong>{resultRest}</p>
     </div>
     <div class="tech-row">
       {tech.map(t => <span class="tech">{t}</span>)}
@@ -187,6 +190,7 @@ const headerTags = [...industry.slice(0, 2), ...tech.slice(0, 2)];
   }
   .result-icon { font-size: 16px; flex-shrink: 0; }
   .result-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+  .result-text strong { color: var(--color-text-primary); font-weight: 500; }
 
   .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
   .tech {
