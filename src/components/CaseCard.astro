@@ -19,10 +19,13 @@ const {
   icon = '📦', iconBg = 'green',
   defaultOpen = false,
 } = Astro.props;
+
+const bodyId = `case-body-${slug}`;
 ---
 
 <div class:list={['case-card', { open: defaultOpen }]} data-case-card>
-  <div class="case-header" role="button" tabindex="0" aria-expanded={String(defaultOpen)}>
+  <div class="case-header" role="button" tabindex="0"
+       aria-expanded={String(defaultOpen)} aria-controls={bodyId}>
     <div class:list={['case-icon', `icon-${iconBg}`]}>{icon}</div>
     <div class="case-info">
       {problemLabel && <p class="case-problem">問題 · {problemLabel}</p>}
@@ -30,7 +33,7 @@ const {
     </div>
     <span class="case-toggle" aria-hidden="true">+</span>
   </div>
-  <div class="case-body">
+  <div class="case-body" id={bodyId}>
     <div class="divider"></div>
     <div class="journey">
       <div class="journey-step step-before">
