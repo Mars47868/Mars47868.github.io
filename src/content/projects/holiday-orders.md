@@ -4,9 +4,14 @@ summary: "POS 機 CSV 一鍵匯入，年菜訂購量自動統計完成"
 industry: ["餐飲業"]
 tech: ["Excel", "VBA"]
 metric: "手動作業時間減少 80%"
+before: "客人電話訂年菜，服務生手寫三聯單，行政再逐筆 key 進 POS，POS 資料再謄進 Excel——三道工序全程手工，年節旺季整理報表就要花掉半個工作天。"
+think: "整個流程其實只有一個真正的資料來源：POS 匯出的 CSV。多餘的步驟來自「資料格式不對，人要去補洞」。用 VBA 直接讀取 CSV 並清洗格式，把三道工序壓成一個按鈕。"
+after: "把 CSV 放進資料夾，按一個按鈕，統計表自動完成。格式統一、幾乎零錯誤，人力從整理資料移到使用資料。"
+result: "手動整理時間減少 80%——讓行政把時間留給真正需要人判斷的事"
+problemLabel: "年節訂單人工彙整"
+icon: "📋"
+iconBg: "amber"
 order: 2
-metricPercentage: 80
-metricLabel: "手動作業時間減少"
 ---
 
 ## 問題背景

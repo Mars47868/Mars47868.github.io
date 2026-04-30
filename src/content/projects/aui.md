@@ -4,9 +4,14 @@ summary: "一行指令，ERP 三份報表秒變庫存會議用表"
 industry: ["製造業", "供應鏈"]
 tech: ["Python", "CLI"]
 metric: "作業時間從 1 小時縮到 5 分鐘"
+before: "每週固定從 ERP 匯出三份格式各異的報表，再逐欄手動比對八個倉別數字，整個流程穩定耗費一小時，還擔心哪個數字算錯、倉別搞混。"
+think: "問題的本質是格式轉換加欄位映射——重複且有規則可以被程式化。選 Python 而非 Excel，是因為它可以進 Git 版本控制、打包成 exe 讓同事不需開發環境即可執行。"
+after: "一行指令，五分鐘後拿到格式正確、欄位齊全的彙整表，可以直接帶進會議室。Python 打包成 exe，同事不需安裝任何工具就能執行。"
+result: "作業時間從 1 小時縮到 5 分鐘——讓 PM 的時間留在分析數字，而不是整理數字"
+problemLabel: "重複性人工整理"
+icon: "📦"
+iconBg: "green"
 order: 1
-metricPercentage: 92
-metricLabel: "節省作業時間"
 ---
 
 ## 問題背景

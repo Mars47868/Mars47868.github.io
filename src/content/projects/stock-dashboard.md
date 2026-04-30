@@ -4,9 +4,14 @@ summary: "整合多家券商持倉，3 秒看出哪支股票的錢在睡覺"
 industry: ["個人財務"]
 tech: ["Google Apps Script", "Google Sheets", "Chart.js"]
 metric: "資產盤點從 30 分鐘縮到 2 分鐘"
+before: "多家券商帳戶分開登入、逐筆記下持倉、手動加總換算台幣——每次想了解整體損益都要花半小時，而且算完仍然看不出哪些資金在有效工作。"
+think: "核心問題是「資料分散」加上「缺少比較視角」。把所有帳戶交易記錄整合進同一份 Sheets，前端用持倉熱度排行視覺化漲跌動能，讓「哪支股票的錢在睡覺」一眼可見。"
+after: "開啟 Web App，自動讀取記錄、抓取即時股價、計算 FIFO 損益，兩分鐘內看完整體狀況，可依持有人篩選不同帳戶。"
+result: "資產盤點從 30 分鐘縮到 2 分鐘——讓投資決策建立在清晰數字上，而不是模糊的記憶"
+problemLabel: "資料分散難以綜觀"
+icon: "📈"
+iconBg: "green"
 order: 4
-metricPercentage: 93
-metricLabel: "節省盤點時間"
 ---
 
 ## 問題背景

@@ -4,9 +4,14 @@ summary: "本地 AI 自動轉錄影片課程，輸出繁體字幕與結構化筆
 industry: ["醫美教育", "內容創作"]
 tech: ["Python", "faster-whisper", "FFmpeg"]
 metric: "每天節省 40 分鐘整理時間"
+before: "課程影片和 Podcast 沒有任何文字整理，想複習特定知識點只能重新播放影片。Whisper 的中文輸出以簡體為主，對繁體中文使用者閱讀體驗很差，手動整理逐字稿又太耗時。"
+think: "謄稿是「人做沒有價值、機器做完全可以」的典型工作。選 faster-whisper（比原版快四倍）加 OpenCC 後處理，讓本地執行直接輸出繁體中文，不需 API 費用，也保護醫療課程的資料隱私。"
+after: "把影片拖進工具，自動輸出 .srt 字幕檔與帶時間戳記的 Markdown 筆記。macOS 版雙擊開啟，不需要終端機。"
+result: "每天節省 40 分鐘整理時間——讓學習者把精力留在消化內容，不是整理內容"
+problemLabel: "影片後製重複流程"
+icon: "🎬"
+iconBg: "blue"
 order: 5
-metricPercentage: 85
-metricLabel: "節省每日整理時間"
 ---
 
 ## 問題背景
