@@ -1,0 +1,81 @@
+---
+const groups = [
+  {
+    label: '後端 / 系統',
+    items: ['Java', 'Spring Boot', 'Redis', 'RabbitMQ', 'Docker', 'MySQL', 'ClickHouse'],
+  },
+  {
+    label: 'AI / 自動化',
+    items: ['Python', 'OpenAI API', 'Whisper', 'LangChain', 'Line API'],
+  },
+  {
+    label: '前端',
+    items: ['React', 'Vue', 'Angular', 'HTML / CSS'],
+  },
+  {
+    label: '產品 / 流程',
+    items: ['需求訪談', '流程分析', 'CI/CD', '敏捷開發', 'Git'],
+  },
+];
+---
+<section class="toolbox-section" id="skills">
+  <p class="section-label">工具箱</p>
+  <div class="skills-grid">
+    {groups.map(group => (
+      <div class="skill-group">
+        <p class="skill-group-label">{group.label}</p>
+        <div class="skill-items">
+          {group.items.map(item => (
+            <span class="skill-item">{item}</span>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .toolbox-section {
+    padding: 2.5rem 0;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.4rem;
+    font-family: var(--font-mono);
+  }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .skill-group {
+    padding: 14px 16px;
+    border: 0.5px solid var(--color-border);
+    border-radius: var(--radius-md);
+    background: var(--color-bg);
+  }
+  .skill-group-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-text-tertiary);
+    margin-bottom: 10px;
+    font-family: var(--font-mono);
+  }
+  .skill-items { display: flex; flex-wrap: wrap; gap: 5px; }
+  .skill-item {
+    font-size: 11px;
+    color: var(--color-text-secondary);
+    padding: 3px 8px;
+    background: var(--color-bg-secondary);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+  }
+  @media (max-width: 600px) {
+    .skills-grid { grid-template-columns: 1fr; }
+  }
+</style>
