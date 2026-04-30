@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title,
-  description = '我幫你把每天重複做的事，變成自動跑的系統。',
+  description = '我找到流程裡的浪費，然後讓它消失。',
   ogImage = '/og-default.png',
 } = Astro.props;
 
@@ -33,43 +33,25 @@ const siteUrl = 'https://marschen.dev';
     <meta name="twitter:image" content={`${siteUrl}${ogImage}`} />
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
     <ClientRouter />
-    <script is:inline>
-      (function() {
-        const saved = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (saved === 'dark' || (!saved && prefersDark)) {
-          document.documentElement.classList.add('dark');
-        }
-      })();
-    </script>
   </head>
-  <body class="antialiased text-[var(--aw-color-text-default)] bg-[var(--aw-color-bg-page)] tracking-tight">
+  <body class="antialiased">
 
-    <header class="sticky top-0 z-40 w-full border-b border-[var(--aw-color-border)] bg-[#F0EDE8]/90 dark:bg-[#141210]/90 backdrop-blur-md">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 flex items-center justify-between h-16">
-        <a href="/" class="font-bold text-lg text-[#1C1917] dark:text-[#E8E0D8] hover:text-primary transition-colors">
-          Mars Chen
+    <header style="position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(10px);border-bottom:0.5px solid var(--color-border);padding:0 2rem;">
+      <div style="max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;">
+        <a href="/" style="font-size:14px;font-weight:500;color:var(--color-text-primary);text-decoration:none;letter-spacing:0.02em;">
+          陳睿凱 Mars
         </a>
-        <nav aria-label="主要導覽" class="flex items-center gap-6">
-          <a href="/#projects" class="text-sm text-[#78716C] dark:text-[#A09590] hover:text-primary dark:hover:text-primary transition-colors">
-            作品
-          </a>
-          <a href="/about" class="text-sm text-[#78716C] dark:text-[#A09590] hover:text-primary dark:hover:text-primary transition-colors">
-            關於我
-          </a>
-          <button
-            id="theme-toggle"
-            aria-label="切換深色模式"
-            class="w-8 h-8 flex items-center justify-center rounded-full text-[#78716C] dark:text-[#A09590] hover:bg-[rgba(80,60,40,0.06)] dark:hover:bg-[rgba(255,240,220,0.06)] transition-colors"
-          >
-            <svg class="w-4 h-4 dark:hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.72 9.72 0 0 1 18 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 0 0 3 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 0 0 9.002-5.998Z" />
-            </svg>
-            <svg class="w-4 h-4 hidden dark:block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
-            </svg>
-          </button>
+        <nav aria-label="主要導覽">
+          <ul style="display:flex;gap:1.5rem;list-style:none;">
+            <li><a href="/#about" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">關於</a></li>
+            <li><a href="/#cases" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">作品</a></li>
+            <li><a href="/#skills" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">技術</a></li>
+            <li><a href="/#contact" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">合作</a></li>
+          </ul>
         </nav>
       </div>
     </header>
@@ -78,53 +60,17 @@ const siteUrl = 'https://marschen.dev';
       <slot />
     </main>
 
-    <footer class="border-t border-[var(--aw-color-border)] py-8 mt-16">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col items-center gap-4">
-        <div class="flex items-center gap-5">
-          <!-- Email -->
-          <a href="mailto:marschen82@gmail.com" aria-label="傳送 Email 給 Mars Chen"
-             class="text-[#A09590] dark:text-[#6B6460] hover:text-primary dark:hover:text-primary transition-colors">
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-            </svg>
-          </a>
-          <!-- GitHub -->
-          <a href="https://github.com/marschen82" target="_blank" rel="noopener noreferrer" aria-label="Mars Chen 的 GitHub"
-             class="text-[#A09590] dark:text-[#6B6460] hover:text-primary dark:hover:text-primary transition-colors">
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.942.359.31.678.921.678 1.856 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2Z" clip-rule="evenodd" />
-            </svg>
-          </a>
-          <!-- Instagram -->
-          <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Mars Chen 的 Instagram"
-             class="text-[#A09590] dark:text-[#6B6460] hover:text-primary dark:hover:text-primary transition-colors">
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069Zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073Zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881Z"/>
-            </svg>
-          </a>
-          <!-- LinkedIn -->
-          <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer" aria-label="Mars Chen 的 LinkedIn"
-             class="text-[#A09590] dark:text-[#6B6460] hover:text-primary dark:hover:text-primary transition-colors">
-            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286ZM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065Zm1.782 13.019H3.555V9h3.564v11.452ZM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003Z"/>
-            </svg>
-          </a>
-        </div>
-        <p class="text-xs text-[#A09590] dark:text-[#6B6460]">© 2026 Mars Chen</p>
+    <footer style="border-top:0.5px solid var(--color-border);padding:1.5rem 2rem;text-align:center;">
+      <div style="max-width:720px;margin:0 auto;font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-mono);">
+        陳睿凱 · Ruei Kai Chen · 台北 · 2026
       </div>
     </footer>
 
-    <script is:inline>
-      document.addEventListener('astro:page-load', () => {
-        const toggle = document.getElementById('theme-toggle');
-        if (toggle) {
-          toggle.addEventListener('click', () => {
-            const isDark = document.documentElement.classList.toggle('dark');
-            localStorage.setItem('theme', isDark ? 'dark' : 'light');
-          });
-        }
-      });
-    </script>
-
   </body>
 </html>
+
+<style>
+  header a:hover, nav a:hover {
+    color: var(--color-teal) !important;
+  }
+</style>
