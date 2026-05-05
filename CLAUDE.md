@@ -11,7 +11,9 @@ Mars Chen 的個人作品集靜態網站，用於求職與接案兩種場合。
 
 - **框架：** Astro 6（靜態網站生成器）
 - **樣式：** Tailwind CSS v4（設定在 `src/styles/global.css`，無 `tailwind.config.js`）
-- **部署：** Vercel
+- **部署：** GitHub Pages（自動部署，push master 即觸發）
+- **上線 URL：** https://mars47868.github.io
+- **GitHub Repo：** https://github.com/Mars47868/Mars47868.github.io
 - **Node.js：** v22（啟動前需 `source ~/.nvm/nvm.sh && nvm use 22`）
 - **作品資料：** Astro Content Collections，存放於 `src/content/projects/`
 - **Schema 定義：** `src/content.config.ts`（Astro 6 路徑，非 `src/content/config.ts`）
