@@ -28,3 +28,6 @@ pnpm-debug.log*
 
 # superpowers brainstorm sessions
 .superpowers/
+
+# internal planning and development docs
+docs/
