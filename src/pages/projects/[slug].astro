@@ -76,4 +76,92 @@ const { title, summary, industry, tech, metric, github, demo } = project.data;
       email="marschen82@gmail.com"
     />
   </div>
+
+<div id="lightbox" aria-hidden="true">
+  <img id="lightbox-img" src="" alt="" />
+</div>
+
+<style is:global>
+  /* !important 覆蓋 Tailwind prose 預設的 max-width: 100% */
+  article .prose img {
+    max-width: 200px !important;
+    width: 100% !important;
+    display: block !important;
+    margin: 1.5rem auto !important;
+    border-radius: 10px;
+    border: 0.5px solid var(--color-border);
+    cursor: zoom-in;
+    transition: opacity 0.15s, box-shadow 0.15s;
+  }
+  article .prose img:hover {
+    opacity: 0.85;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+  }
+
+  #lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+  }
+  #lightbox[aria-hidden="false"] {
+    display: flex;
+  }
+  #lightbox-img {
+    max-width: min(90vw, 680px);
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+  }
+</style>
+
+<script>
+  // 儲存 cleanup 函式，每次 page-load 先清掉上一輪的 document 事件，避免 ClientRouter 重複疊加
+  let cleanup: (() => void) | null = null;
+
+  document.addEventListener('astro:page-load', () => {
+    if (cleanup) { cleanup(); cleanup = null; }
+
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img') as HTMLImageElement;
+    if (!lightbox || !lightboxImg) return;
+
+    const close = () => {
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    };
+
+    const handleImgClick = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'IMG' && target.closest('article .prose')) {
+        const img = target as HTMLImageElement;
+        lightboxImg.src = img.src;
+        lightboxImg.alt = img.alt;
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+      }
+    };
+
+    const handleKeydown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') close();
+    };
+
+    // 用 event delegation 掛在 document，避免每張圖重複綁
+    document.addEventListener('click', handleImgClick);
+    lightbox.addEventListener('click', close);
+    document.addEventListener('keydown', handleKeydown);
+
+    cleanup = () => {
+      document.removeEventListener('click', handleImgClick);
+      document.removeEventListener('keydown', handleKeydown);
+      // 離開頁面時確保 overflow 恢復
+      document.body.style.overflow = '';
+    };
+  });
+</script>
 </BaseLayout>
