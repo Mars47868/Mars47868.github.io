@@ -31,3 +31,4 @@ pnpm-debug.log*
 
 # internal planning and development docs
 docs/
+tasks/
