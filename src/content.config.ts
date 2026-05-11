@@ -15,7 +15,6 @@ const projects = defineCollection({
     after: z.string(),
     result: z.string(),
     problemLabel: z.string().optional(),
-    icon: z.string().optional(),
     iconBg: z.enum(['green', 'blue', 'amber']).optional(),
     github: z.url().optional(),
     demo: z.url().optional(),
