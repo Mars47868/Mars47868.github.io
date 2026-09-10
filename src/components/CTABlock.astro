@@ -5,8 +5,9 @@ interface Props {
   email: string;
   linkedin?: string;
   github?: string;
+  resume?: string;
 }
-const { heading, desc, email, linkedin, github } = Astro.props;
+const { heading, desc, email, linkedin, github, resume } = Astro.props;
 ---
 <section class="cta-section" id="contact">
   <div class="cta-block">
@@ -16,6 +17,11 @@ const { heading, desc, email, linkedin, github } = Astro.props;
       <a class="cta-btn cta-btn-primary" href={`mailto:${email}`}>
         寫信給我
       </a>
+      {resume && (
+        <a class="cta-btn cta-btn-secondary" href={resume} target="_blank" rel="noopener noreferrer">
+          履歷 PDF ↓
+        </a>
+      )}
       {linkedin && (
         <a class="cta-btn cta-btn-secondary" href={linkedin} target="_blank" rel="noopener noreferrer">
           LinkedIn →

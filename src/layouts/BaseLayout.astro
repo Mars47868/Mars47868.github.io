@@ -14,7 +14,7 @@ const {
   ogImage = '/og-default.png',
 } = Astro.props;
 
-const siteUrl = 'https://marschen.dev';
+const siteUrl = 'https://mars47868.github.io';
 ---
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
@@ -51,6 +51,7 @@ const siteUrl = 'https://marschen.dev';
             <li><a href="/#cases" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">作品</a></li>
             <li><a href="/#skills" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">技術</a></li>
             <li><a href="/#contact" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">合作</a></li>
+            <li><a href="/resume.pdf" target="_blank" rel="noopener" style="font-size:12.5px;font-weight:500;color:var(--color-teal);text-decoration:none;border:1px solid var(--color-teal);border-radius:100px;padding:4px 13px;white-space:nowrap;">履歷 PDF ↓</a></li>
           </ul>
         </nav>
       </div>
@@ -72,5 +73,17 @@ const siteUrl = 'https://marschen.dev';
 <style>
   header a:hover, nav a:hover {
     color: var(--color-teal) !important;
+  }
+  /* 手機版：導覽列（含履歷 PDF 按鈕）寬度超過視窗時允許換行，高度改為自適應 */
+  @media (max-width: 480px) {
+    header { padding: 0 1rem !important; }
+    header > div {
+      height: auto !important;
+      min-height: 48px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+      row-gap: 6px;
+    }
+    header nav ul { gap: 0.9rem !important; }
   }
 </style>

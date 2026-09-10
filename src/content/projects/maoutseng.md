@@ -2,7 +2,7 @@
 title: "食品貿易商官網重建"
 summary: "為 B2B 食品貿易商重建官網，後台 CMS 讓客戶自行管理產品與新聞，免委外修改程式"
 industry: ["食品貿易", "B2B 電商"]
-tech: ["Java", "Spring Boot", "MySQL", "Google Cloud Translation API"]
+tech: ["PHP", "Laravel", "MySQL", "Google Cloud Translation API"]
 metric: "官網維護從委外改為自助，後台中英雙語一鍵上架"
 before: "客戶官網為純靜態架構，任何內容更新——新增產品、修改新聞、調整聯絡資料——都要委外請工程師直接改 HTML 再重新部署。官網也沒有英文版本，面對海外採購商時只能提供中文頁面。"
 think: "核心需求是 CMS，不是換前端框架。後台採 Spring Boot 3 + Thymeleaf SSR，確保穩定不依賴前端 JS；公開頁面保留原有 HTML/CSS 設計，改以 REST API 驅動動態內容，降低視覺改動風險。中英文自動翻譯接 Google Cloud Translation API，儲存時觸發——編輯只需維護中文，英文版自動同步，是客戶最在意的功能之一。"
@@ -10,7 +10,7 @@ after: "後台 CMS 涵蓋產品管理（含 Excel 批次匯入）、新聞管理
 result: "靜態官網升級為動態 CMS，客戶無需工程師介入即可自行維護全站中英雙語內容"
 problemLabel: "純靜態官網，任何內容更新都需委外工程師修改程式碼"
 iconBg: "amber"
-order: 6
+order: 7
 ---
 
 ## 問題背景
@@ -21,18 +21,24 @@ order: 6
 
 ## 解決方案
 
-重建為 Spring Boot 3 動態網站，核心是一套後台 CMS：
+重建為 Laravel 11（PHP 8.2）動態網站，核心是一套後台 CMS：
 
 - **產品管理**：新增、編輯、下架個別產品；支援 Excel + ZIP 圖片批次匯入，依產品編號判斷新增或更新
 - **新聞管理**：使用富文字編輯器撰寫中文內容，儲存時自動翻譯為英文
 - **詢問單管理**：聯絡我們與商業採購表單自動建立案件、寄送通知信，後台可追蹤處理狀態
 - **雙語切換**：前台訪客可切換中英文，英文內容由翻譯 API 於後台儲存時生成，前台讀取已儲存欄位，速度不受影響
 
+## 我的角色與做法
+
+- **單人交付整包**：需求訪談、架構與資料庫設計、前後台開發、部署與交付手冊，全程一人完成——客戶的對口從頭到尾只有我。
+- **對接非技術客戶**：功能取捨不談技術名詞，談維護成本與風險——「這個做法你們以後自己能不能改」是每個決策的第一個問題。
+- **交付即移交**：後台分 ADMIN／EDITOR 權限、附操作手冊，上線後客戶自行營運，不產生對工程師的長期依賴。
+
 ## 技術決策
 
 核心抉擇是選 SaaS CMS 還是自建。WordPress、Strapi 等方案部署在客戶 Linux 主機維護成本高，且現有前台是從鏡像抓取的 HTML/CSS，換框架意味著重新切版。選擇自建後台，讓前台設計不動，只把動態資料改為 REST API 驅動，視覺風險最低。
 
-後台採 Thymeleaf SSR + PRG Pattern，確保表單不會重複送出。公開端點走 REST API，前台 JavaScript `fetch` 載入動態內容。Spring Security 做 Session-based 認證，分 ADMIN（全功能）和 EDITOR（帳號管理除外）兩個角色。
+後台採 Blade SSR + PRG Pattern，確保表單不會重複送出。公開端點走 REST API，前台 JavaScript `fetch` 載入動態內容。認證採 Laravel session 機制，分 ADMIN（全功能）和 EDITOR（帳號管理除外）兩個角色。
 
 Google Cloud Translation API 接在儲存時觸發：編輯只填中文，翻譯在後台完成並存入資料庫。前台讀取時直接取已翻譯欄位，無即時 API 呼叫，前台效能不受影響。
 

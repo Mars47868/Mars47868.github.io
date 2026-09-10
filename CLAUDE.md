@@ -48,10 +48,10 @@ npm run preview
 ## 品牌定位
 
 **Hero 定位句：**
-> 「我幫你把每天重複做的事，變成自動跑的系統。」
+> 「我找到流程裡的浪費，然後讓它消失。」
 > Java 後端 × Python × AI 整合 × 流程自動化
 
-**視覺風格：** 白底/深色雙模式，主色電藍 `#3B82F6`（`--color-primary`）
+**視覺風格：** 暖白底單一主題（無深色模式），主色墨綠 `#0F6E56`（`--color-teal`），標題用 Noto Serif TC，標籤/label 用 JetBrains Mono
 
 ---
 
@@ -59,23 +59,27 @@ npm run preview
 
 | 路由 | 說明 |
 |------|------|
-| `/` | 首頁：Hero + 作品卡片列表 |
+| `/` | 首頁：Hero + 為什麼是我（#about）+ 作品手風琴卡片（#cases）+ 工具箱（#skills）+ CTA（#contact） |
 | `/projects/[slug]` | 個別作品 Case Study 頁 |
-| `/about` | 關於我（轉職故事敘事型） |
 
-聯絡方式放在 Footer（icon-only 社群連結），無獨立 `/contact` 頁。
+- 無獨立 `/about`、`/contact` 頁，導覽列為首頁錨點連結
+- 導覽列有「履歷 PDF」按鈕，連到 `/resume.pdf`（來源：`/Users/marschen/Desktop/personal_workspace/CV/cv-source/` 的 `陳睿凱_CV.pdf`，CV 更新後需重新複製）
 
 ---
 
 ## 作品清單
 
-| slug | 工具名稱 | 產業 | 技術 |
-|------|---------|------|------|
-| `aui` | 庫存表自動生成工具 AUI | 製造業、供應鏈 | Python、CLI |
-| `holiday-orders` | 年節訂單報表彙整 | 餐飲業 | Excel VBA |
-| `quick-medication` | 快速用藥查詢工具 | 醫療診所 | Google Apps Script |
-| `stock-dashboard` | 股票監控台 | 個人財務 | Google Apps Script、Google Sheets |
-| `video-notes` | 影片轉錄文字工具 | 醫美教育、內容創作 | Python、AI、faster-whisper |
+| slug | 工具名稱 | 產業 | 技術 | order |
+|------|---------|------|------|-------|
+| `podcast-notes` | Podcast 筆記自動化流程 | 個人知識管理、內容創作 | Python、faster-whisper、GAS、LINE API | 1 |
+| `aui` | 庫存表自動生成工具 | 製造業、供應鏈 | Python、CLI | 2 |
+| `holiday-orders` | 年節訂單報表彙整 | 餐飲業 | Excel VBA | 3 |
+| `quick-medication` | 快速用藥查詢工具 | 醫療診所 | Google Apps Script | 4 |
+| `stock-dashboard` | 股票資產監控台 | 個人財務 | GAS、Sheets、Chart.js、Cloudflare Pages | 5 |
+| `video-notes` | 影片轉錄與摘要工具 | 內容創作 | Python、faster-whisper、FFmpeg | 6 |
+| `maoutseng` | 食品貿易商官網重建 | 食品貿易、B2B | PHP、Laravel 11、MySQL | 7 |
+
+新增作品時，需同步在 `src/lib/projectIcons.ts` 加入對應 slug 的幾何 SVG icon（stroke-width 1.6、round cap 風格）。
 
 ---
 
@@ -83,12 +87,16 @@ npm run preview
 
 ```yaml
 title: ""              # 工具名稱
-summary: ""            # 一句話成效（作品卡片顯示）
+summary: ""            # 一句話成效（內頁顯示）
 industry: []           # 產業標籤陣列
 tech: []               # 技術標籤陣列
-metric: ""             # 成效數字（視覺化大字顯示）
-metricPercentage: 80   # 選填，進度條百分比（0–100）
-metricLabel: ""        # 選填，進度條說明文字
+metric: ""             # 成效數字（內頁大字顯示）
+before: ""             # 卡片展開：之前的痛
+think: ""              # 卡片展開：我怎麼想
+after: ""              # 卡片展開：最後的結果
+result: ""             # 卡片展開：結果列（「——」前的部分會加粗）
+problemLabel: ""       # 選填，卡片標題上方的問題一句話
+iconBg: "green"        # 選填，green / blue / amber
 github: ""             # 選填
 demo: ""               # 選填
 cover: ""              # 選填，封面截圖路徑（src/assets/projects/）
@@ -102,6 +110,7 @@ order: 1               # 首頁排序
 ```
 ## 問題背景
 ## 解決方案
+## 我的角色與做法   ← 3 個 bullet：角色/獨立程度、關鍵做法、交付方式
 ## 技術決策
 ## 挑戰與踩坑
 ```
@@ -112,34 +121,22 @@ order: 1               # 首頁排序
 
 ## 設計規範（色彩）
 
-> 完整 spec：`docs/superpowers/specs/2026-04-29-warm-palette-design.md`
+> token 定義在 `src/styles/global.css` 的 `:root`，以下為摘要
 
-### 淺色模式
-- 背景：`#FAFAF8`（微暖白）
-- Navbar backdrop：`#F0EDE8`
-- 主文字：`#1C1917`，次要文字：`rgba(28,25,23,0.55)`
-- 邊框：`rgba(80,60,40,0.09)`
-
-### 深色模式
-- 背景：`#141210`（暖炭黑）
-- 卡片面：`rgba(30,26,22,0.6)`
-- 主文字：`#E8E0D8`，次要文字：`rgba(232,224,216,0.55)`
-- 邊框：`rgba(255,240,220,0.08)`
-
-### 保留不動
-- 主色電藍：`#0161EF`（`--color-primary`）
-- TagPill 配色（藍/琥珀）
-- 禁止在元件中使用 `bg-white`、`border-gray-*`、`dark:bg-slate-*` 等冷調 class
+- 背景：`#FAFAF8`（暖白）、次層 `#F3F2EF`、三層 `#ECEAE5`
+- 文字：主 `#1C1C1A`、次 `#5F5E5A`、三 `#8F8D88`
+- 主色：墨綠 `--color-teal: #0F6E56`（淺底 `#E1F5EE`）、輔色琥珀 `#BA7517`（淺底 `#FAEEDA`）
+- 邊框：`rgba(28,28,26,0.10)`，中階 `rgba(28,28,26,0.18)`
+- 卡片展開三段色：before 紅 `#FCEBEB`、think 藍 `#EBF3FB`、after 綠 `#EAF3DE`
+- 禁止在元件中使用 `bg-white`、`border-gray-*` 等冷調 class；一律走 CSS 變數
 
 ---
 
 ## 開發原則
 
-- 作品卡片視覺優先順序：成效數字 > 一句話摘要 > 產業標籤 > 技術標籤
-- 成效區塊使用「進度條 + 放大數字」，不用表格
+- 作品卡片為手風琴式：collapsed 顯示 problemLabel + 標題 + 標籤，展開顯示 Before/Think/After 三格 + result 列 + 技術標籤
 - 每個頁面底部需有 CTA（email 聯絡引導）
-- `/about` 的工作經歷採敘事型轉職故事，不用純時間軸條列
-- 卡片 hover：`-translate-y-1` 上浮 + `shadow-xl`
+- OG 圖：`public/og-default.png`（1200×630，用 headless Chrome 渲染 HTML 產生）；`BaseLayout.astro` 的 `siteUrl` 為 `https://mars47868.github.io`
 
 ---
 
@@ -152,7 +149,7 @@ order: 1               # 首頁排序
 | 文件 | 路徑 |
 |------|------|
 | 開發進度 | `tasks/todo.md` |
+| 網站進化評估（更新項目清單） | `docs/superpowers/specs/2026-09-10-site-evolution-assessment.md` |
 | 作品彙整原始資料 | `docs/工具彙整.md` |
 | 設計規格 | `docs/superpowers/specs/2026-04-24-portfolio-website-design.md` |
-| 實作計畫 | `docs/superpowers/plans/2026-04-24-portfolio-website.md` |
-| 工作經歷原始資料 | `/Users/marschen/Desktop/印度占星/KAI/工作經歷及近況.txt` |
+| 履歷原始資料（最新） | `/Users/marschen/Desktop/personal_workspace/CV/cv-source/cv-zh.html` |

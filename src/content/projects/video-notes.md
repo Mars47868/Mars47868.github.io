@@ -10,7 +10,7 @@ after: "把影片拖進去，自動輸出 .srt 字幕檔與帶時間戳記的 Ma
 result: "把影片內容從只能重播，變成可以搜尋、可以分享的文字筆記"
 problemLabel: "課程影片沒有文字整理，複習只能重播，謄稿又太耗時"
 iconBg: "blue"
-order: 5
+order: 6
 ---
 
 ## 問題背景
@@ -36,6 +36,12 @@ python -m video_notes lecture.mp4
 # 批次處理整個課程資料夾
 python -m video_notes ./lectures/
 ```
+
+## 我的角色與做法
+
+- **獨立完成兩種介面**：CLI 給自動化場景、PyQt6 GUI 給不開終端機的使用者，macOS 版打包成 `.app` 雙擊即用——同一套核心，兩種交付。
+- **為下游而設計**：核心轉錄邏輯與介面分離，後來直接成為 [Podcast 筆記自動化流程](/projects/podcast-notes)的轉錄引擎，被 pipeline 以指令呼叫。
+- **誠實標示限制**：專業術語辨識率偏低是已知限制，寫在工具說明裡讓使用者用之前就知道，而不是讓人踩到才發現。
 
 ## 技術決策
 
