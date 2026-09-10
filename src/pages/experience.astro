@@ -1,0 +1,234 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Toolbox from '../components/Toolbox.astro';
+import CTABlock from '../components/CTABlock.astro';
+
+const timeline = [
+  {
+    date: '2025.09 – 至今',
+    role: '軟體工程師',
+    org: '双引資訊 · 台北',
+    context: '軟體顧問公司，主要客戶為台北富邦銀行；任內交付橫跨九個銀行系統。',
+    bullets: [
+      '<strong>主導信託簽署系統後台</strong>：覆核簽核流程、契據差異比對、ESB SOAP 介接、欄位級加密與 LDAP 認證。',
+      '個資禁查戶檢核從名單入檔排程做到申辦流程攔截，橫跨兩套不共用程式碼的技術棧、<strong>五條申辦流程</strong>；同期把身分驗證的 OTP 升級為 RFC 6238 TOTP。',
+      '銀行官網基金專區去 iframe 化，收斂後消除 <strong>28 處重複資源引用、7 次重複 API 呼叫</strong>。',
+      '擔任資安弱點修補技術窗口：滲透測試與弱掃報告逐項對照原始碼查證，剔除誤判後提出修復方式與影響範圍供客戶決策。',
+    ],
+    pivot: false,
+  },
+  {
+    date: '2024.08 – 2025.06',
+    role: 'Java 後端工程師',
+    org: '送子鳥生殖中心 · 台北',
+    context: '台灣規模最大的生殖醫學中心之一。',
+    bullets: [
+      '將診察、文件、顧客管理三套異質系統整合進中心的 Artemis 平台；資料分類邏輯重構為 <strong>Strategy Pattern</strong>，新增分類從侵入式修改變成單純擴充。',
+      '設計 MySQL schema，以 Spring Data JPA 與 Redis 快取優化查詢效能。',
+    ],
+    pivot: false,
+  },
+  {
+    date: '2023.03 – 2024.06',
+    role: 'Java 工程師',
+    org: 'Groundhog Technologies · 台北',
+    context: '電信網路智慧分析軟體商，服務全球行動通訊業者。',
+    bullets: [
+      'RF 推薦模組導入 <strong>R-Tree 空間索引</strong>取代逐筆距離比對，以專案測試資料實測執行時間縮短<strong>超過 50%</strong>。',
+      '為大規模行動網路資料設計 MySQL 輸出表結構與唯一索引，串接 ClickHouse 作為大量結果的批次匯入目標。',
+    ],
+    pivot: false,
+  },
+  {
+    date: '2022.08 – 2023.01',
+    role: '轉職：Java Web 前後端開發班（全職）',
+    org: '緯育 TibaMe',
+    context: '',
+    bullets: [],
+    pivot: true,
+    pivotNote: '職涯轉折點——從「定義問題的人」變成「動手解掉問題的人」',
+  },
+  {
+    date: '2019.10 – 2022.08',
+    role: '產品經理',
+    org: '亞果元素國際 → 友訊科技 D-Link · 台北',
+    context: '消費電子配件品牌與網通大廠。',
+    bullets: [
+      '負責佔公司<strong>約 40% 營收</strong>的核心產品線；2021 年主導 <strong>8 條產品線上市</strong>，帶動 <strong>35% 年營收成長</strong>。',
+      '跨研發、設計、供應鏈與生產規劃執行規格制定與驗收——現在跟客戶談需求、訂驗收標準的能力就是這裡練的。',
+    ],
+    pivot: false,
+  },
+];
+---
+<BaseLayout
+  title="經歷 · 陳睿凱 Mars"
+  description="從產品經理到後端工程師：3 年 PM、3 年以上橫跨電信、醫療、金融的商業開發經驗。">
+  <div style="max-width:720px;margin:0 auto;padding:0 2rem 2rem;">
+
+    <section class="exp-head">
+      <p class="section-label">經歷 · Experience</p>
+      <h1 class="exp-headline">從產品經理到後端工程師，<br />中間沒有斷點。</h1>
+      <p class="exp-intro">
+        3 年 PM 帶產品線上市，再花半年全職轉職，接著 3 年以上在電信、醫療、金融三個
+        資料敏感產業寫正式環境的系統。兩條能力主軸：金融業的法遵與資安交付，
+        以及大規模資料下的效能優化。
+      </p>
+    </section>
+
+    <section class="exp-timeline-section">
+      <div class="timeline">
+        {timeline.map(item => (
+          <div class:list={['tl-item', { pivot: item.pivot }]}>
+            <p class="tl-date">{item.date}</p>
+            <p class="tl-role">{item.role}</p>
+            <p class="tl-org">{item.org}</p>
+            {item.context && <p class="tl-context">{item.context}</p>}
+            {item.bullets.length > 0 && (
+              <ul class="tl-bullets">
+                {item.bullets.map(b => <li set:html={b} />)}
+              </ul>
+            )}
+            {item.pivot && <span class="tl-pivot-note">{item.pivotNote}</span>}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <Toolbox />
+
+    <CTABlock
+      heading="想看完整版？"
+      desc="履歷 PDF 一鍵下載，或直接看我實際解決過的問題。"
+      email="marschen82@gmail.com"
+      resume="/resume.pdf"
+    />
+
+  </div>
+</BaseLayout>
+
+<style>
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.4rem;
+    font-family: var(--font-mono);
+  }
+  .exp-head {
+    padding: 3rem 0 2rem;
+  }
+  .exp-headline {
+    font-family: var(--font-serif);
+    font-size: 30px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+    line-height: 1.45;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+  }
+  .exp-intro {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    max-width: 560px;
+  }
+
+  .exp-timeline-section {
+    padding: 0.5rem 0 2.5rem;
+    border-bottom: 0.5px solid var(--color-border);
+  }
+  .timeline {
+    position: relative;
+    padding-left: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 7px;
+    top: 8px;
+    bottom: 8px;
+    width: 1px;
+    background: var(--color-border-mid);
+  }
+  .tl-item { position: relative; }
+  .tl-item::before {
+    content: "";
+    position: absolute;
+    left: -24px;
+    top: 7px;
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--color-bg);
+    border: 2px solid var(--color-teal);
+  }
+  .tl-item.pivot::before { background: var(--color-teal); }
+
+  .tl-date {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--color-text-tertiary);
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+  .tl-role {
+    font-size: 15.5px;
+    font-weight: 500;
+    color: var(--color-text-primary);
+  }
+  .tl-org {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    margin-bottom: 6px;
+  }
+  .tl-context {
+    font-size: 12.5px;
+    color: var(--color-text-tertiary);
+    margin-bottom: 8px;
+  }
+  .tl-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 0;
+  }
+  .tl-bullets li {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    line-height: 1.75;
+    padding-left: 14px;
+    position: relative;
+  }
+  .tl-bullets li::before {
+    content: "·";
+    position: absolute;
+    left: 2px;
+    color: var(--color-teal);
+    font-weight: 700;
+  }
+  .tl-bullets li :global(strong) {
+    color: var(--color-text-primary);
+    font-weight: 500;
+  }
+  .tl-pivot-note {
+    display: inline-block;
+    font-size: 12px;
+    color: var(--color-teal);
+    background: var(--color-teal-light);
+    border-radius: 100px;
+    padding: 3px 12px;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 600px) {
+    .exp-head { padding: 2.2rem 0 1.6rem; }
+    .exp-headline { font-size: 25px; }
+  }
+</style>

@@ -1,0 +1,50 @@
+# Decap CMS 設定
+# 本機使用：npm run cms（啟動 decap-server 代理）+ npm run dev，開 http://localhost:4321/admin/
+# 線上使用（未啟用）：需架 GitHub OAuth proxy（可用 Cloudflare Worker），屆時移除 local_backend 即可
+
+backend:
+  name: github
+  repo: Mars47868/Mars47868.github.io
+  branch: master
+  commit_messages:
+    create: "feat: 新增作品「{{slug}}」（via CMS）"
+    update: "docs: 更新作品「{{slug}}」（via CMS）"
+    delete: "chore: 刪除作品「{{slug}}」（via CMS）"
+    uploadMedia: "chore: 上傳圖片 {{path}}（via CMS）"
+    deleteMedia: "chore: 刪除圖片 {{path}}（via CMS）"
+
+# 本機開發模式：透過 decap-server 直接讀寫本地檔案，不需登入
+local_backend: true
+
+site_url: https://mars47868.github.io
+media_folder: "src/assets/projects"
+public_folder: "../../assets/projects"
+
+collections:
+  - name: "projects"
+    label: "作品"
+    folder: "src/content/projects"
+    extension: "md"
+    format: "frontmatter"
+    create: true
+    slug: "{{slug}}"
+    identifier_field: "title"
+    summary: "{{order}} · {{title}}"
+    sortable_fields: ["order", "title"]
+    fields:
+      - { name: "title", label: "工具名稱", widget: "string" }
+      - { name: "summary", label: "一句話摘要（內頁顯示）", widget: "string" }
+      - { name: "industry", label: "產業標籤", widget: "list", field: { name: "tag", label: "標籤", widget: "string" } }
+      - { name: "tech", label: "技術標籤", widget: "list", field: { name: "tag", label: "標籤", widget: "string" } }
+      - { name: "metric", label: "成效數字（內頁大字）", widget: "string" }
+      - { name: "before", label: "Before · 之前的痛", widget: "text" }
+      - { name: "think", label: "Think · 我怎麼想", widget: "text" }
+      - { name: "after", label: "After · 最後的結果", widget: "text" }
+      - { name: "result", label: "結果列（「——」前會加粗）", widget: "text" }
+      - { name: "problemLabel", label: "卡片問題一句話", widget: "string", required: false }
+      - { name: "iconBg", label: "icon 底色", widget: "select", options: ["green", "blue", "amber"], required: false }
+      - { name: "github", label: "GitHub 連結", widget: "string", required: false }
+      - { name: "demo", label: "Live Demo 連結", widget: "string", required: false }
+      - { name: "cover", label: "封面圖路徑", widget: "string", required: false }
+      - { name: "order", label: "首頁排序", widget: "number", value_type: "int", min: 1 }
+      - { name: "body", label: "正文（問題背景／解決方案／我的角色與做法／技術決策／挑戰與踩坑）", widget: "markdown" }

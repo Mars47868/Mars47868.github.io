@@ -41,6 +41,9 @@ npm run build
 
 # 預覽建構結果
 npm run preview
+
+# 內容後台（Decap CMS 本機模式，需搭配 npm run dev 一起跑）
+npm run cms
 ```
 
 ---
@@ -61,8 +64,10 @@ npm run preview
 |------|------|
 | `/` | 首頁：Hero + 為什麼是我（#about）+ 作品手風琴卡片（#cases）+ 工具箱（#skills）+ CTA（#contact） |
 | `/projects/[slug]` | 個別作品 Case Study 頁 |
+| `/experience` | 經歷頁：時間軸倒序 + 量化成就 bullets（內容源自 CV）+ 工具箱 + CTA |
+| `/admin/` | Decap CMS 內容後台（本機模式：`npm run cms` + `npm run dev`，開 `localhost:4321/admin/index.html`；線上模式未啟用，需 OAuth proxy） |
 
-- 無獨立 `/about`、`/contact` 頁，導覽列為首頁錨點連結
+- 無獨立 `/about`、`/contact` 頁，導覽列為首頁錨點連結 + `/experience`
 - 導覽列有「履歷 PDF」按鈕，連到 `/resume.pdf`（來源：`/Users/marschen/Desktop/personal_workspace/CV/cv-source/` 的 `陳睿凱_CV.pdf`，CV 更新後需重新複製）
 
 ---
@@ -78,6 +83,7 @@ npm run preview
 | `stock-dashboard` | 股票資產監控台 | 個人財務 | GAS、Sheets、Chart.js、Cloudflare Pages | 5 |
 | `video-notes` | 影片轉錄與摘要工具 | 內容創作 | Python、faster-whisper、FFmpeg | 6 |
 | `maoutseng` | 食品貿易商官網重建 | 食品貿易、B2B | PHP、Laravel 11、MySQL | 7 |
+| `portfolio-site` | 個人作品集網站（本站） | 個人品牌 | Astro、GitHub Actions、Decap CMS | 8 |
 
 新增作品時，需同步在 `src/lib/projectIcons.ts` 加入對應 slug 的幾何 SVG icon（stroke-width 1.6、round cap 風格）。
 

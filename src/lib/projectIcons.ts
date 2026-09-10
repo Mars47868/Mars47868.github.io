@@ -12,4 +12,6 @@ export const projectIcons: Record<string, string> = {
   'video-notes': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="14" x2="4" y2="10"/><line x1="7" y1="16" x2="7" y2="8"/><line x1="10" y1="18" x2="10" y2="6"/><line x1="13" y1="15" x2="13" y2="9"/><line x1="16" y1="13" x2="16" y2="11"/><line x1="17" y1="12" x2="20" y2="12"/><polyline points="18.5,10.5 20,12 18.5,13.5"/></svg>`,
 
   'maoutseng': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><line x1="3.5" y1="9" x2="20.5" y2="9"/><line x1="3.5" y1="15" x2="20.5" y2="15"/></svg>`,
+
+  'portfolio-site': `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><line x1="3" y1="8.5" x2="21" y2="8.5"/><line x1="6" y1="6.3" x2="7.5" y2="6.3"/><line x1="6.5" y1="12.5" x2="14" y2="12.5"/><line x1="6.5" y1="16" x2="17.5" y2="16"/></svg>`,
 };

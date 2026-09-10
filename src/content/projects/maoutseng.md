@@ -5,7 +5,7 @@ industry: ["食品貿易", "B2B 電商"]
 tech: ["PHP", "Laravel", "MySQL", "Google Cloud Translation API"]
 metric: "官網維護從委外改為自助，後台中英雙語一鍵上架"
 before: "客戶官網為純靜態架構，任何內容更新——新增產品、修改新聞、調整聯絡資料——都要委外請工程師直接改 HTML 再重新部署。官網也沒有英文版本，面對海外採購商時只能提供中文頁面。"
-think: "核心需求是 CMS，不是換前端框架。後台採 Spring Boot 3 + Thymeleaf SSR，確保穩定不依賴前端 JS；公開頁面保留原有 HTML/CSS 設計，改以 REST API 驅動動態內容，降低視覺改動風險。中英文自動翻譯接 Google Cloud Translation API，儲存時觸發——編輯只需維護中文，英文版自動同步，是客戶最在意的功能之一。"
+think: "核心需求是 CMS，不是換前端框架。後台採 Laravel 11 + Blade SSR，確保穩定不依賴前端 JS；公開頁面保留原有 HTML/CSS 設計，改以 REST API 驅動動態內容，降低視覺改動風險。中英文自動翻譯接 Google Cloud Translation API，儲存時觸發——編輯只需維護中文，英文版自動同步，是客戶最在意的功能之一。"
 after: "後台 CMS 涵蓋產品管理（含 Excel 批次匯入）、新聞管理、聯絡與商業採購詢問單管理。產品儲存時自動翻譯生成英文欄位，前台中英切換不需額外工程作業。詢問單收到後自動寄送通知信至公司信箱，後台可追蹤處理進度。"
 result: "靜態官網升級為動態 CMS，客戶無需工程師介入即可自行維護全站中英雙語內容"
 problemLabel: "純靜態官網，任何內容更新都需委外工程師修改程式碼"
