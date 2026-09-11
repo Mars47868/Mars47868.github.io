@@ -11,7 +11,7 @@ const projects = await getCollection('projects');
 const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
 const featured = sorted.filter(p => p.data.featured);
 ---
-<BaseLayout title="陳睿凱 Mars · 流程自動化工程師">
+<BaseLayout title="Mars Chen · 流程自動化工程師">
   <div style="max-width:720px;margin:0 auto;padding:0 2rem 4rem;">
 
     <Hero />

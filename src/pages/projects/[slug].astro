@@ -124,12 +124,12 @@ const { title, summary, industry, tech, metric, github, demo, before, think, aft
     .journey { grid-template-columns: 1fr; }
   }
 
-  /* !important 覆蓋 Tailwind prose 預設的 max-width: 100% */
+  /* 內文圖片與正文同寬;小於欄寬的圖維持原尺寸不放大(避免模糊) */
   article .prose img {
-    max-width: 200px !important;
-    width: 100% !important;
+    max-width: 100% !important;
+    width: auto !important;
     display: block !important;
-    margin: 1.5rem auto !important;
+    margin: 1.75rem auto !important;
     border-radius: 10px;
     border: 0.5px solid var(--color-border);
     cursor: zoom-in;
@@ -154,8 +154,8 @@ const { title, summary, industry, tech, metric, github, demo, before, think, aft
     display: flex;
   }
   #lightbox-img {
-    max-width: min(90vw, 680px);
-    max-height: 88vh;
+    max-width: 94vw;
+    max-height: 92vh;
     object-fit: contain;
     border-radius: 10px;
     box-shadow: 0 8px 48px rgba(0,0,0,0.5);
