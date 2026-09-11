@@ -11,6 +11,7 @@ result: "已自動處理約 50 集、全程 0 人工介入——含鎖檔互斥�
 problemLabel: "每集 Podcast 手動做筆記要 1–2 小時"
 iconBg: "green"
 cover: "podcastNotes_card.png"
+featured: true
 order: 1
 ---
 

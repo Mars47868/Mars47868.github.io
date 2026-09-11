@@ -12,6 +12,7 @@ problemLabel: "多帳戶分開登入逐筆加總，想看整體損益要花半�
 demo: "https://stock-dashboard-web-ann.pages.dev/"
 iconBg: "green"
 cover: "stockDashboard_overview.png"
+featured: true
 order: 5
 ---
 

@@ -62,7 +62,7 @@ npm run cms
 
 | 路由 | 說明 |
 |------|------|
-| `/` | 首頁：Hero + 為什麼是我（#about）+ 作品手風琴卡片（#cases）+ 工具箱（#skills）+ CTA（#contact） |
+| `/` | 首頁：Hero + 為什麼是我（#about）+ 精選/其他作品大圖卡（#cases，整卡連內頁）+ 工具箱（#skills）+ CTA（#contact） |
 | `/projects/[slug]` | 個別作品 Case Study 頁 |
 | `/experience` | 經歷頁：時間軸倒序 + 量化成就 bullets（內容源自 CV）+ 工具箱 + CTA |
 | `/admin/` | Decap CMS 內容後台（本機模式：`npm run cms` + `npm run dev`，開 `localhost:4321/admin/index.html`；線上模式未啟用，需 OAuth proxy） |
@@ -101,7 +101,8 @@ before: ""             # 卡片展開：之前的痛
 think: ""              # 卡片展開：我怎麼想
 after: ""              # 卡片展開：最後的結果
 result: ""             # 卡片展開：結果列（「——」前的部分會加粗）
-problemLabel: ""       # 選填，卡片標題上方的問題一句話
+problemLabel: ""       # 選填，問題一句話
+featured: true         # 選填，首頁精選區（未設為其他作品）
 iconBg: "green"        # 選填，green / blue / amber
 github: ""             # 選填
 demo: ""               # 選填
@@ -147,7 +148,9 @@ order: 1               # 首頁排序
 
 ## 開發原則
 
-- 作品卡片為手風琴式：collapsed 顯示 84×63 縮圖（frontmatter `cover` 檔名，指向 `src/assets/projects/`；無 cover 則 fallback 同尺寸幾何 icon 色塊）+ problemLabel + 標題 + 標籤，展開顯示 Before/Think/After 三格 + result 列 + 技術標籤
+- 作品卡片（`ProjectCard.astro`）為 Josh 式大圖卡：16:10 全幅 cover（frontmatter `cover` 檔名，指向 `src/assets/projects/`；無 cover 則 fallback 為 tint 底 + 淡格線 + 大幾何 icon）+ 技術標籤 + 標題 + summary +「查看案例 →」，**整卡連結至內頁**
+- 首頁以 frontmatter `featured: true` 分「精選作品」「其他作品」兩組，同一種卡片
+- Before/Think/After 三段條顯示在**作品內頁** header 下方（`[slug].astro` 的 `.journey`），首頁不再有手風琴
 - 每個頁面底部需有 CTA（email 聯絡引導）
 - OG 圖：`public/og-default.png`（1200×630，用 headless Chrome 渲染 HTML 產生）；`BaseLayout.astro` 的 `siteUrl` 為 `https://mars47868.github.io`
 

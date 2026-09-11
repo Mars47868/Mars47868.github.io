@@ -11,6 +11,7 @@ result: "把影片內容從只能重播，變成可以搜尋、可以分享的�
 problemLabel: "課程影片沒有文字整理，複習只能重播，謄稿又太耗時"
 iconBg: "blue"
 cover: "videoNotes_GUI.png"
+featured: true
 order: 6
 ---
 

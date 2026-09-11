@@ -1,0 +1,129 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { projectIcons } from '../lib/projectIcons';
+
+interface Props {
+  title: string;
+  summary: string;
+  tech: string[];
+  slug: string;
+  iconBg?: 'green' | 'blue' | 'amber';
+  cover?: string;
+}
+
+const { title, summary, tech, slug, iconBg = 'green', cover } = Astro.props;
+
+// cover 存檔名（如 podcastNotes_card.png），由此解析成 Astro 資產
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/projects/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+const coverImg = cover ? images[`../assets/projects/${cover}`]?.default : undefined;
+---
+
+<a href={`/projects/${slug}`} class="pcard">
+  {coverImg ? (
+    <div class="pcard-img">
+      <Image src={coverImg} alt={`${title} 截圖`} width={720} height={450} class="pcard-cover" />
+    </div>
+  ) : (
+    <div class:list={['pcard-ph', `ph-${iconBg}`]} set:html={projectIcons[slug] ?? ''}></div>
+  )}
+  <div class="pcard-body">
+    <div class="pcard-tags">
+      {tech.slice(0, 3).map(t => <span class="pcard-tag">{t}</span>)}
+    </div>
+    <p class="pcard-title">{title}</p>
+    <p class="pcard-sum">{summary}</p>
+    <span class="pcard-link">查看案例 →</span>
+  </div>
+</a>
+
+<style>
+  .pcard {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  }
+  .pcard:hover {
+    transform: translateY(-3px);
+    border-color: var(--color-accent-border);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .pcard-img {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-bg-secondary);
+  }
+  .pcard-img :global(img.pcard-cover) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.25s ease;
+  }
+  .pcard:hover .pcard-img :global(img.pcard-cover) { transform: scale(1.03); }
+
+  /* 無截圖作品:tint 底 + 淡格線 + 大幾何 icon */
+  .pcard-ph {
+    aspect-ratio: 16 / 10;
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image:
+      linear-gradient(var(--color-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .ph-green { background-color: var(--color-teal-light); color: var(--color-teal); }
+  .ph-blue  { background-color: var(--color-blue-light);  color: var(--color-blue-icon); }
+  .ph-amber { background-color: var(--color-amber-light); color: var(--color-amber); }
+  .pcard-ph :global(svg) {
+    width: 64px;
+    height: 64px;
+    opacity: 0.9;
+    transition: transform 0.25s ease;
+  }
+  .pcard:hover .pcard-ph :global(svg) { transform: scale(1.06); }
+
+  .pcard-body { padding: 16px 18px 18px; }
+  .pcard-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+  .pcard-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-tertiary);
+  }
+  .pcard-title {
+    font-family: var(--font-head);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 6px;
+  }
+  .pcard-sum {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+    line-height: 1.65;
+    margin-bottom: 12px;
+  }
+  .pcard-link {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--color-teal);
+  }
+</style>

@@ -3,12 +3,14 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Hero from '../components/Hero.astro';
 import WhyMeBlock from '../components/WhyMeBlock.astro';
-import CaseCard from '../components/CaseCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
 import Toolbox from '../components/Toolbox.astro';
 import CTABlock from '../components/CTABlock.astro';
 
 const projects = await getCollection('projects');
 const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
+const featured = sorted.filter(p => p.data.featured);
+const others = sorted.filter(p => !p.data.featured);
 ---
 <BaseLayout title="陳睿凱 Mars · 流程自動化工程師">
   <div style="max-width:720px;margin:0 auto;padding:0 2rem 4rem;">
@@ -19,26 +21,40 @@ const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
 
     <section style="padding:3rem 0;border-bottom:1px solid var(--color-border);" id="cases">
       <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1.5rem;font-family:var(--font-mono);">
-        我解決過的問題
+        精選作品
       </p>
-      <div style="display:flex;flex-direction:column;gap:12px;">
-        {sorted.map((p, i) => (
-          <CaseCard
+      <div class="project-grid">
+        {featured.map(p => (
+          <ProjectCard
             title={p.data.title}
-            problemLabel={p.data.problemLabel}
-            before={p.data.before}
-            think={p.data.think}
-            after={p.data.after}
-            result={p.data.result}
+            summary={p.data.summary}
             tech={p.data.tech}
-            industry={p.data.industry}
             slug={p.id}
             iconBg={p.data.iconBg}
             cover={p.data.cover}
-            defaultOpen={false}
           />
         ))}
       </div>
+
+      {others.length > 0 && (
+        <>
+          <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-tertiary);margin:2.5rem 0 1.5rem;font-family:var(--font-mono);">
+            其他作品
+          </p>
+          <div class="project-grid">
+            {others.map(p => (
+              <ProjectCard
+                title={p.data.title}
+                summary={p.data.summary}
+                tech={p.data.tech}
+                slug={p.id}
+                iconBg={p.data.iconBg}
+                cover={p.data.cover}
+              />
+            ))}
+          </div>
+        </>
+      )}
     </section>
 
     <Toolbox />
@@ -54,3 +70,14 @@ const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
 
   </div>
 </BaseLayout>
+
+<style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 640px) {
+    .project-grid { grid-template-columns: 1fr; }
+  }
+</style>

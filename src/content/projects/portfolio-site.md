@@ -12,6 +12,7 @@ problemLabel: "模板作品集放不下 case study 的深度"
 iconBg: "blue"
 github: "https://github.com/Mars47868/Mars47868.github.io"
 cover: "portfolioSite_home.png"
+featured: true
 order: 8
 ---
 

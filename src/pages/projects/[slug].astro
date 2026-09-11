@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, summary, industry, tech, metric, github, demo } = project.data;
+const { title, summary, industry, tech, metric, github, demo, before, think, after } = project.data;
 ---
 
 <BaseLayout title={title} description={summary}>
@@ -57,6 +57,21 @@ const { title, summary, industry, tech, metric, github, demo } = project.data;
       <hr style="border:none;border-top:1px solid var(--color-border);" />
     </header>
 
+    <div class="journey">
+      <div class="journey-step step-before">
+        <p class="step-label label-before">Before · 之前的痛</p>
+        <p class="step-text">{before}</p>
+      </div>
+      <div class="journey-step step-think">
+        <p class="step-label label-think">Think · 我怎麼想</p>
+        <p class="step-text">{think}</p>
+      </div>
+      <div class="journey-step step-after">
+        <p class="step-label label-after">After · 最後的結果</p>
+        <p class="step-text">{after}</p>
+      </div>
+    </div>
+
     <div class="prose prose-stone dark:prose-invert max-w-none
       prose-h2:text-xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:mt-10 prose-h2:mb-4
       prose-h2:pb-2 prose-h2:border-b prose-h2:border-[var(--color-border)]
@@ -82,6 +97,33 @@ const { title, summary, industry, tech, metric, github, demo } = project.data;
 </div>
 
 <style is:global>
+  /* 內頁 Before/Think/After 三段條(原首頁手風琴內容移入) */
+  .journey {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 0.5rem;
+  }
+  .journey-step { padding: 12px 14px; border-radius: var(--radius-md); }
+  .step-before { background: var(--color-before-bg); }
+  .step-think  { background: var(--color-think-bg); }
+  .step-after  { background: var(--color-after-bg); }
+  .step-label {
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-bottom: 7px;
+    font-family: var(--font-mono);
+  }
+  .label-before { color: var(--color-before-text); }
+  .label-think  { color: var(--color-think-text); }
+  .label-after  { color: var(--color-after-text); }
+  .step-text { font-size: 12.5px; line-height: 1.65; color: var(--color-text-primary); }
+  @media (max-width: 600px) {
+    .journey { grid-template-columns: 1fr; }
+  }
+
   /* !important 覆蓋 Tailwind prose 預設的 max-width: 100% */
   article .prose img {
     max-width: 200px !important;

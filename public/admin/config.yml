@@ -42,6 +42,7 @@ collections:
       - { name: "after", label: "After · 最後的結果", widget: "text" }
       - { name: "result", label: "結果列（「——」前會加粗）", widget: "text" }
       - { name: "problemLabel", label: "卡片問題一句話", widget: "string", required: false }
+      - { name: "featured", label: "精選作品(首頁精選區)", widget: "boolean", required: false, default: false }
       - { name: "iconBg", label: "icon 底色", widget: "select", options: ["green", "blue", "amber"], required: false }
       - { name: "github", label: "GitHub 連結", widget: "string", required: false }
       - { name: "demo", label: "Live Demo 連結", widget: "string", required: false }
