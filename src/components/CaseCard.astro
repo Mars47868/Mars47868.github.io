@@ -1,4 +1,6 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import { projectIcons } from '../lib/projectIcons';
 
 interface Props {
@@ -12,6 +14,7 @@ interface Props {
   industry?: string[];
   slug: string;
   iconBg?: 'green' | 'blue' | 'amber';
+  cover?: string;
   defaultOpen?: boolean;
 }
 
@@ -19,8 +22,16 @@ const {
   title, problemLabel, before, think, after, result,
   tech, industry = [], slug,
   iconBg = 'green',
+  cover,
   defaultOpen = false,
 } = Astro.props;
+
+// cover 存檔名（如 podcastNotes_card.png），由此解析成 Astro 資產
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/projects/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+const coverImg = cover ? images[`../assets/projects/${cover}`]?.default : undefined;
 
 const bodyId = `case-body-${slug}`;
 const headerTags = [...industry.slice(0, 2), ...tech.slice(0, 2)];
@@ -32,7 +43,13 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
 <div class:list={['case-card', { open: defaultOpen }]} data-case-card>
   <div class="case-header" role="button" tabindex="0"
        aria-expanded={defaultOpen} aria-controls={bodyId}>
-    <div class:list={['case-icon', `icon-${iconBg}`]} set:html={projectIcons[slug] ?? ''}></div>
+    {coverImg ? (
+      <div class="case-visual">
+        <Image src={coverImg} alt={`${title} 截圖`} width={168} height={126} class="case-visual-img" />
+      </div>
+    ) : (
+      <div class:list={['case-visual', 'case-visual-fallback', `icon-${iconBg}`]} set:html={projectIcons[slug] ?? ''}></div>
+    )}
     <div class="case-info">
       {problemLabel && <p class="case-problem">問題 · {problemLabel}</p>}
       <p class="case-title">{title}</p>
@@ -73,37 +90,53 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
 
 <style>
   .case-card {
-    background: var(--color-bg);
-    border: 0.5px solid var(--color-border);
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);
     overflow: hidden;
-    transition: border-color var(--transition);
+    box-shadow: var(--shadow-card);
+    transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   }
-  .case-card:hover { border-color: var(--color-border-mid); }
-  .case-card.open { border-color: var(--color-teal); border-width: 1px; }
+  .case-card:hover {
+    border-color: var(--color-accent-border);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+  }
+  .case-card.open { border-color: var(--color-teal); transform: none; }
 
   .case-header {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
-    padding: 1.25rem 1.4rem;
+    gap: 16px;
+    padding: 1.15rem 1.3rem;
     cursor: pointer;
   }
-  .case-icon {
-    width: 38px;
-    height: 38px;
-    border-radius: var(--radius-sm);
+
+  /* 方案 A:84×63 視覺格——有 cover 顯示縮圖,無則 icon fallback 同尺寸 */
+  .case-visual {
+    width: 84px;
+    height: 63px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    margin-top: 2px;
+  }
+  .case-visual :global(img.case-visual-img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .case-visual-fallback {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    flex-shrink: 0;
-    margin-top: 2px;
   }
-  .case-icon svg { width: 100%; height: 100%; display: block; }
-  .icon-green { background: var(--color-teal-light); color: #0F6E56; }
-  .icon-blue  { background: var(--color-blue-light);  color: #0161EF; }
-  .icon-amber { background: var(--color-amber-light); color: #BA7517; }
+  .case-visual-fallback :global(svg) { width: 26px; height: 26px; }
+  .icon-green { background: var(--color-teal-light); color: var(--color-teal); }
+  .icon-blue  { background: var(--color-blue-light);  color: var(--color-blue-icon); }
+  .icon-amber { background: var(--color-amber-light); color: var(--color-amber); }
 
   .case-info { flex: 1; min-width: 0; }
   .case-problem {
@@ -113,17 +146,19 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
     letter-spacing: 0.02em;
   }
   .case-title {
-    font-size: 15px;
-    font-weight: 500;
+    font-family: var(--font-head);
+    font-size: 15.5px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
     color: var(--color-text-primary);
     line-height: 1.4;
   }
-  .case-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+  .case-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
   .case-tag {
-    font-size: 10px;
-    padding: 2px 7px;
-    border-radius: 3px;
-    background: var(--color-bg-tertiary);
+    font-size: 10.5px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: var(--color-bg-secondary);
     color: var(--color-text-tertiary);
     font-family: var(--font-mono);
   }
@@ -147,12 +182,12 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
 
   .case-body {
     display: none;
-    padding: 0 1.4rem 1.4rem;
+    padding: 0 1.3rem 1.3rem;
   }
   .case-card.open .case-body { display: block; }
 
   .divider {
-    height: 0.5px;
+    height: 1px;
     background: var(--color-border);
     margin-bottom: 1.2rem;
   }
@@ -190,9 +225,9 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
     padding: 12px 14px;
     margin-bottom: 1rem;
   }
-  .result-icon { font-size: 16px; flex-shrink: 0; }
+  .result-icon { font-size: 16px; flex-shrink: 0; color: var(--color-teal); }
   .result-text { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
-  .result-text strong { color: var(--color-text-primary); font-weight: 500; }
+  .result-text strong { color: var(--color-text-primary); font-weight: 600; }
 
   .tech-row { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1rem; }
   .tech {
@@ -200,7 +235,7 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
     padding: 4px 9px;
     border-radius: var(--radius-sm);
     background: var(--color-bg-secondary);
-    border: 0.5px solid var(--color-border);
+    border: 1px solid var(--color-border);
     color: var(--color-text-secondary);
     font-family: var(--font-mono);
   }
@@ -216,6 +251,8 @@ const resultRest = resultParts.length > 1 ? '——' + resultParts.slice(1).join
 
   @media (max-width: 600px) {
     .journey { grid-template-columns: 1fr; }
+    .case-visual { width: 64px; height: 48px; }
+    .case-visual-fallback :global(svg) { width: 22px; height: 22px; }
   }
 </style>
 

@@ -4,7 +4,7 @@
 @theme {
   --color-primary:   rgb(15 110 86);
   --color-secondary: rgb(13 95 74);
-  --font-family-sans: 'Noto Sans TC', ui-sans-serif, system-ui, sans-serif;
+  --font-family-sans: 'Inter', 'Noto Sans TC', ui-sans-serif, system-ui, sans-serif;
 }
 
 @variant dark (&:where(.dark, .dark *));
@@ -13,40 +13,109 @@
   box-sizing: border-box;
 }
 
+/* ============================================================
+   雙主題 token
+   淺色 = 方向三「冷靜折衷」:近中性冷白 × 墨綠
+   深色 = 方向二「暗色科技」:深炭 × 亮綠(墨綠的亮色版,同色相)
+   ============================================================ */
+
 :root {
-  --color-bg:              #FAFAF8;
-  --color-bg-secondary:    #F3F2EF;
-  --color-bg-tertiary:     #ECEAE5;
-  --color-text-primary:    #1C1C1A;
-  --color-text-secondary:  #5F5E5A;
-  --color-text-tertiary:   #8F8D88;
+  /* 底色層 */
+  --color-bg:              #FBFBFA;
+  --color-bg-secondary:    #F1F2F0;
+  --color-bg-tertiary:     #E9EAE7;
+  --color-card:            #FFFFFF;
+  --color-header-bg:       rgba(251, 251, 250, 0.92);
+
+  /* 文字 */
+  --color-text-primary:    #16181A;
+  --color-text-secondary:  #5B6058;
+  --color-text-tertiary:   #979B93;
+
+  /* 強調色(沿用墨綠) */
   --color-teal:            #0F6E56;
   --color-teal-light:      #E1F5EE;
-  --color-teal-mid:        #1D9E75;
+  --color-teal-mid:        #0D5F4A;
+  --color-on-accent:       #FFFFFF;
+  --color-accent-border:   rgba(15, 110, 86, 0.40);
+
+  /* 輔助色 */
   --color-amber:           #BA7517;
   --color-amber-light:     #FAEEDA;
+  --color-blue-icon:       #0161EF;
   --color-blue-light:      #E6F1FB;
-  --color-border:          rgba(28,28,26,0.10);
-  --color-border-mid:      rgba(28,28,26,0.18);
+
+  /* 邊框 */
+  --color-border:          rgba(22, 24, 26, 0.09);
+  --color-border-mid:      rgba(22, 24, 26, 0.18);
+
+  /* 卡片展開三段色 */
   --color-before-bg:       #FCEBEB;
   --color-before-text:     #7A2020;
   --color-think-bg:        #EBF3FB;
   --color-think-text:      #1A4A7A;
   --color-after-bg:        #EAF3DE;
   --color-after-text:      #2A5A12;
-  --font-serif:  'Noto Serif TC', serif;
-  --font-sans:   'Noto Sans TC', sans-serif;
-  --font-mono:   'JetBrains Mono', monospace;
+
+  /* 陰影 */
+  --shadow-card:           0 1px 2px rgba(22, 24, 26, 0.04);
+  --shadow-card-hover:     0 8px 24px rgba(15, 110, 86, 0.08);
+
+  /* 字體:標題與內文皆無襯線,標籤/眉標用 mono */
+  --font-head:   'Inter', 'Noto Sans TC', 'PingFang TC', sans-serif;
+  --font-sans:   'Inter', 'Noto Sans TC', 'PingFang TC', sans-serif;
+  --font-mono:   'JetBrains Mono', ui-monospace, monospace;
+  /* 向後相容:舊元件若仍引用 serif,一律落到無襯線標題字 */
+  --font-serif:  var(--font-head);
+
   --radius-sm:   6px;
   --radius-md:   10px;
   --radius-lg:   14px;
   --transition:  0.18s ease;
 
-  /* 向後相容別名，讓舊組件在重構前繼續正常 */
+  /* 向後相容別名 */
   --aw-color-text-default: var(--color-text-primary);
   --aw-color-text-muted:   var(--color-text-secondary);
   --aw-color-bg-page:      var(--color-bg);
   --aw-color-border:       var(--color-border);
+}
+
+html.dark {
+  color-scheme: dark;
+
+  --color-bg:              #0C0F13;
+  --color-bg-secondary:    #161B21;
+  --color-bg-tertiary:     #1D242C;
+  --color-card:            #11151A;
+  --color-header-bg:       rgba(12, 15, 19, 0.90);
+
+  --color-text-primary:    #E9EDF2;
+  --color-text-secondary:  #9AA6B2;
+  --color-text-tertiary:   #61707E;
+
+  --color-teal:            #3DDC97;
+  --color-teal-light:      rgba(61, 220, 151, 0.12);
+  --color-teal-mid:        #34C687;
+  --color-on-accent:       #0C0F13;
+  --color-accent-border:   rgba(61, 220, 151, 0.40);
+
+  --color-amber:           #E5A34C;
+  --color-amber-light:     rgba(229, 163, 76, 0.14);
+  --color-blue-icon:       #6FB1FF;
+  --color-blue-light:      rgba(111, 177, 255, 0.14);
+
+  --color-border:          rgba(233, 237, 242, 0.09);
+  --color-border-mid:      rgba(233, 237, 242, 0.20);
+
+  --color-before-bg:       rgba(224, 92, 92, 0.13);
+  --color-before-text:     #F2A9A9;
+  --color-think-bg:        rgba(88, 148, 228, 0.13);
+  --color-think-text:      #A4C6F2;
+  --color-after-bg:        rgba(88, 190, 128, 0.13);
+  --color-after-text:      #A8E2BE;
+
+  --shadow-card:           0 1px 2px rgba(0, 0, 0, 0.30);
+  --shadow-card-hover:     0 0 0 1px rgba(61, 220, 151, 0.25), 0 12px 32px rgba(0, 0, 0, 0.50);
 }
 
 html {
@@ -60,6 +129,7 @@ html {
 
 body {
   min-height: 100vh;
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -69,7 +139,7 @@ img {
   display: block;
 }
 
-a:focus-visible {
+a:focus-visible, button:focus-visible {
   outline: 2px solid var(--color-teal);
   outline-offset: 2px;
   border-radius: 2px;
@@ -80,5 +150,5 @@ a:focus-visible {
 }
 
 section[id] {
-  scroll-margin-top: 64px;
+  scroll-margin-top: 72px;
 }

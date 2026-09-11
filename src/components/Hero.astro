@@ -17,45 +17,46 @@ const chips = ['後端工程', 'AI 整合', '流程自動化', '產品思維', '
 
 <style>
   .hero {
-    padding: 4rem 0 3rem;
-    border-bottom: 0.5px solid var(--color-border);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--color-border);
   }
   .hero-location {
     font-size: 12px;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--color-text-tertiary);
-    margin-bottom: 1.2rem;
+    margin-bottom: 1.4rem;
     font-family: var(--font-mono);
   }
   .hero-headline {
-    font-family: var(--font-serif);
-    font-size: 36px;
-    font-weight: 500;
+    font-family: var(--font-head);
+    font-size: 40px;
+    font-weight: 700;
     color: var(--color-text-primary);
-    line-height: 1.35;
+    line-height: 1.25;
     margin-bottom: 1.4rem;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
   }
   .hero-headline .highlight {
     color: var(--color-teal);
   }
   .hero-sub {
-    font-size: 15px;
+    font-size: 15.5px;
     color: var(--color-text-secondary);
-    line-height: 1.7;
-    max-width: 520px;
-    margin-bottom: 1.6rem;
+    line-height: 1.75;
+    max-width: 540px;
+    margin-bottom: 1.8rem;
   }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chip {
-    font-size: 12px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
     padding: 5px 12px;
-    border-radius: 100px;
-    border: 0.5px solid var(--color-border-mid);
+    border-radius: var(--radius-sm);
+    border: 1px solid var(--color-border);
     color: var(--color-text-secondary);
     background: var(--color-bg-secondary);
-    letter-spacing: 0.01em;
     transition: border-color var(--transition), color var(--transition);
   }
   .chip:hover {
@@ -63,7 +64,7 @@ const chips = ['後端工程', 'AI 整合', '流程自動化', '產品思維', '
     color: var(--color-teal);
   }
   @media (max-width: 600px) {
-    .hero { padding: 2.5rem 0 2rem; }
-    .hero-headline { font-size: 28px; }
+    .hero { padding: 3rem 0 2.4rem; }
+    .hero-headline { font-size: 30px; }
   }
 </style>

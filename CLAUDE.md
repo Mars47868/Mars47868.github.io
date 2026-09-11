@@ -54,7 +54,7 @@ npm run cms
 > 「我找到流程裡的浪費，然後讓它消失。」
 > Java 後端 × Python × AI 整合 × 流程自動化
 
-**視覺風格：** 暖白底單一主題（無深色模式），主色墨綠 `#0F6E56`（`--color-teal`），標題用 Noto Serif TC，標籤/label 用 JetBrains Mono
+**視覺風格：** 雙主題（`html.dark` class 切換，localStorage 記憶 + 系統偏好預設）。淺色＝冷白 `#FBFBFA` × 墨綠 `#0F6E56`；深色＝深炭 `#0C0F13` × 亮綠 `#3DDC97`（墨綠的同色相亮色版）。標題用 Inter/Noto Sans 粗體（緊字距），標籤/眉標用 JetBrains Mono，無襯線字體、不用 serif
 
 ---
 
@@ -127,20 +127,27 @@ order: 1               # 首頁排序
 
 ## 設計規範（色彩）
 
-> token 定義在 `src/styles/global.css` 的 `:root`，以下為摘要
+> 雙主題 token 定義在 `src/styles/global.css`：`:root` 為淺色、`html.dark` 覆蓋為深色。元件一律走 CSS 變數，禁止硬編色碼或 `bg-white` / `border-gray-*` 等 class
 
-- 背景：`#FAFAF8`（暖白）、次層 `#F3F2EF`、三層 `#ECEAE5`
-- 文字：主 `#1C1C1A`、次 `#5F5E5A`、三 `#8F8D88`
-- 主色：墨綠 `--color-teal: #0F6E56`（淺底 `#E1F5EE`）、輔色琥珀 `#BA7517`（淺底 `#FAEEDA`）
-- 邊框：`rgba(28,28,26,0.10)`，中階 `rgba(28,28,26,0.18)`
-- 卡片展開三段色：before 紅 `#FCEBEB`、think 藍 `#EBF3FB`、after 綠 `#EAF3DE`
-- 禁止在元件中使用 `bg-white`、`border-gray-*` 等冷調 class；一律走 CSS 變數
+| token | 淺色 | 深色 |
+|-------|------|------|
+| `--color-bg` | `#FBFBFA` | `#0C0F13` |
+| `--color-bg-secondary` | `#F1F2F0` | `#161B21` |
+| `--color-card` | `#FFFFFF` | `#11151A` |
+| 文字 主/次/三 | `#16181A` / `#5B6058` / `#979B93` | `#E9EDF2` / `#9AA6B2` / `#61707E` |
+| `--color-teal`（強調） | `#0F6E56` | `#3DDC97` |
+| `--color-amber`（輔） | `#BA7517` | `#E5A34C` |
+| 邊框 | `rgba(22,24,26,0.09)` | `rgba(233,237,242,0.09)` |
+
+- 卡片展開三段色（before 紅 / think 藍 / after 綠）兩主題各有一組，見 global.css
+- 深色新增色一律同時定義兩主題的值，不可只寫一邊
+- 主題切換：BaseLayout head 內 inline script 於首繪前套用（防閃爍），`astro:after-swap` 換頁後重套；按鈕在導覽列
 
 ---
 
 ## 開發原則
 
-- 作品卡片為手風琴式：collapsed 顯示 problemLabel + 標題 + 標籤，展開顯示 Before/Think/After 三格 + result 列 + 技術標籤
+- 作品卡片為手風琴式：collapsed 顯示 84×63 縮圖（frontmatter `cover` 檔名，指向 `src/assets/projects/`；無 cover 則 fallback 同尺寸幾何 icon 色塊）+ problemLabel + 標題 + 標籤，展開顯示 Before/Think/After 三格 + result 列 + 技術標籤
 - 每個頁面底部需有 CTA（email 聯絡引導）
 - OG 圖：`public/og-default.png`（1200×630，用 headless Chrome 渲染 HTML 產生）；`BaseLayout.astro` 的 `siteUrl` 為 `https://mars47868.github.io`
 

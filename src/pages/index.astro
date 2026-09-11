@@ -17,11 +17,11 @@ const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
 
     <WhyMeBlock />
 
-    <section style="padding:2.5rem 0;border-bottom:0.5px solid var(--color-border);" id="cases">
-      <p style="font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1.4rem;font-family:var(--font-mono);">
+    <section style="padding:3rem 0;border-bottom:1px solid var(--color-border);" id="cases">
+      <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:1.5rem;font-family:var(--font-mono);">
         我解決過的問題
       </p>
-      <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;flex-direction:column;gap:12px;">
         {sorted.map((p, i) => (
           <CaseCard
             title={p.data.title}
@@ -34,6 +34,7 @@ const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
             industry={p.data.industry}
             slug={p.id}
             iconBg={p.data.iconBg}
+            cover={p.data.cover}
             defaultOpen={false}
           />
         ))}

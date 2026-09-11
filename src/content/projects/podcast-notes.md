@@ -10,6 +10,7 @@ after: "LINE 傳訊息後流程自動執行：下載、轉錄、校稿、摘要�
 result: "已自動處理約 50 集、全程 0 人工介入——含鎖檔互斥、心跳監控與休眠補觸發的可靠性設計"
 problemLabel: "每集 Podcast 手動做筆記要 1–2 小時"
 iconBg: "green"
+cover: "podcastNotes_card.png"
 order: 1
 ---
 

@@ -10,6 +10,7 @@ after: "把影片拖進去，自動輸出 .srt 字幕檔與帶時間戳記的 Ma
 result: "把影片內容從只能重播，變成可以搜尋、可以分享的文字筆記"
 problemLabel: "課程影片沒有文字整理，複習只能重播，謄稿又太耗時"
 iconBg: "blue"
+cover: "videoNotes_GUI.png"
 order: 6
 ---
 

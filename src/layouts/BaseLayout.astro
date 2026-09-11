@@ -35,24 +35,40 @@ const siteUrl = 'https://mars47868.github.io';
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500&family=Noto+Sans+TC:wght@400;500&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+    <!-- 主題初始化:在首次繪製前套用,避免閃爍;astro:after-swap 供 ClientRouter 換頁後重套 -->
+    <script is:inline>
+      (function () {
+        function applyTheme() {
+          var t = localStorage.getItem('theme')
+            || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.classList.toggle('dark', t === 'dark');
+        }
+        applyTheme();
+        document.addEventListener('astro:after-swap', applyTheme);
+      })();
+    </script>
     <ClientRouter />
   </head>
   <body class="antialiased">
 
-    <header style="position:sticky;top:0;z-index:100;background:rgba(250,250,248,0.92);backdrop-filter:blur(10px);border-bottom:0.5px solid var(--color-border);padding:0 2rem;">
-      <div style="max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:52px;">
-        <a href="/" style="font-size:14px;font-weight:500;color:var(--color-text-primary);text-decoration:none;letter-spacing:0.02em;">
-          陳睿凱 Mars
-        </a>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a href="/" class="site-logo">陳睿凱 Mars</a>
         <nav aria-label="主要導覽">
-          <ul style="display:flex;gap:1.5rem;list-style:none;">
-            <li><a href="/#about" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">關於</a></li>
-            <li><a href="/#cases" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">作品</a></li>
-            <li><a href="/experience" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">經歷</a></li>
-            <li><a href="/#skills" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">技術</a></li>
-            <li><a href="/#contact" style="font-size:13px;color:var(--color-text-secondary);text-decoration:none;">合作</a></li>
-            <li><a href="/resume.pdf" target="_blank" rel="noopener" style="font-size:12.5px;font-weight:500;color:var(--color-teal);text-decoration:none;border:1px solid var(--color-teal);border-radius:100px;padding:4px 13px;white-space:nowrap;">履歷 PDF ↓</a></li>
+          <ul class="site-nav">
+            <li><a href="/#about">關於</a></li>
+            <li><a href="/#cases">作品</a></li>
+            <li><a href="/experience">經歷</a></li>
+            <li class="hide-sm"><a href="/#skills">技術</a></li>
+            <li class="hide-sm"><a href="/#contact">合作</a></li>
+            <li><a href="/resume.pdf" target="_blank" rel="noopener" class="resume-btn">履歷 PDF ↓</a></li>
+            <li>
+              <button id="theme-toggle" class="theme-toggle" aria-label="切換深淺主題" title="切換深淺主題">
+                <svg class="icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><line x1="12" y1="2" x2="12" y2="4.5"/><line x1="12" y1="19.5" x2="12" y2="22"/><line x1="2" y1="12" x2="4.5" y2="12"/><line x1="19.5" y1="12" x2="22" y2="12"/><line x1="4.9" y1="4.9" x2="6.7" y2="6.7"/><line x1="17.3" y1="17.3" x2="19.1" y2="19.1"/><line x1="4.9" y1="19.1" x2="6.7" y2="17.3"/><line x1="17.3" y1="6.7" x2="19.1" y2="4.9"/></svg>
+                <svg class="icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+              </button>
+            </li>
           </ul>
         </nav>
       </div>
@@ -62,29 +78,118 @@ const siteUrl = 'https://mars47868.github.io';
       <slot />
     </main>
 
-    <footer style="border-top:0.5px solid var(--color-border);padding:1.5rem 2rem;text-align:center;">
-      <div style="max-width:720px;margin:0 auto;font-size:12px;color:var(--color-text-tertiary);font-family:var(--font-mono);">
-        陳睿凱 · MARS CHEN · 台北 · 2026
-      </div>
+    <footer class="site-footer">
+      <div>陳睿凱 · MARS CHEN · 台北 · 2026</div>
     </footer>
 
   </body>
 </html>
 
 <style>
-  header a:hover, nav a:hover {
-    color: var(--color-teal) !important;
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--color-header-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--color-border);
+    padding: 0 2rem;
   }
-  /* 手機版：導覽列（含履歷 PDF 按鈕）寬度超過視窗時允許換行，高度改為自適應 */
-  @media (max-width: 480px) {
-    header { padding: 0 1rem !important; }
-    header > div {
-      height: auto !important;
+  .site-header-inner {
+    max-width: 760px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    gap: 12px;
+  }
+  .site-logo {
+    font-family: var(--font-head);
+    font-size: 14.5px;
+    font-weight: 600;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .site-nav {
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .site-nav a {
+    font-size: 13.5px;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    transition: color var(--transition);
+  }
+  .site-nav a:hover, .site-logo:hover { color: var(--color-teal); }
+  .resume-btn {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--color-teal) !important;
+    border: 1px solid var(--color-accent-border);
+    border-radius: 8px;
+    padding: 6px 14px;
+    white-space: nowrap;
+    transition: border-color var(--transition), background var(--transition);
+  }
+  .resume-btn:hover { border-color: var(--color-teal); background: var(--color-teal-light); }
+  .theme-toggle {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-text-secondary);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: color var(--transition), border-color var(--transition);
+  }
+  .theme-toggle:hover { color: var(--color-teal); border-color: var(--color-accent-border); }
+  .theme-toggle .icon-sun { display: none; }
+  .theme-toggle .icon-moon { display: block; }
+  :global(html.dark) .theme-toggle .icon-sun { display: block; }
+  :global(html.dark) .theme-toggle .icon-moon { display: none; }
+
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    padding: 1.6rem 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: var(--color-text-tertiary);
+    font-family: var(--font-mono);
+    letter-spacing: 0.04em;
+  }
+
+  /* 手機版:允許換行、縮小間距 */
+  @media (max-width: 520px) {
+    .site-header { padding: 0 1.2rem; }
+    .site-header-inner {
+      height: auto;
       min-height: 48px;
       flex-wrap: wrap;
       padding: 8px 0;
       row-gap: 6px;
     }
-    header nav ul { gap: 0.9rem !important; }
+    .site-nav { gap: 0.85rem; flex-wrap: wrap; }
+    .site-nav li.hide-sm { display: none; }
   }
 </style>
+
+<script>
+  document.addEventListener('astro:page-load', () => {
+    const btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    btn.addEventListener('click', () => {
+      const dark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', dark ? 'dark' : 'light');
+    });
+  });
+</script>

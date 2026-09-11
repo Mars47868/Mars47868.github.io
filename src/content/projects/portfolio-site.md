@@ -11,6 +11,7 @@ result: "網站本身成為能力證明——每個技術決策都在回答「�
 problemLabel: "模板作品集放不下 case study 的深度"
 iconBg: "blue"
 github: "https://github.com/Mars47868/Mars47868.github.io"
+cover: "portfolioSite_home.png"
 order: 8
 ---
 
@@ -23,7 +24,7 @@ order: 8
 ## 解決方案
 
 - **內容架構**：作品是 Astro Content Collections 管理的 Markdown，frontmatter 有 Zod schema 驗證——欄位缺漏在 build 時就會報錯，不會上線後才發現
-- **設計系統**：暖白底 × 墨綠主色 × 襯線標題的自訂 token 系統，所有元件走 CSS 變數，不用任何現成佈景
+- **設計系統**：冷白底 × 墨綠主色的自訂 token 系統，深色模式換成深炭底 × 亮綠（同色相的亮色版），所有元件走 CSS 變數，不用任何現成佈景
 - **卡片敘事**：首頁作品卡展開後是「Before／Think／After」三段式，先講問題與思路，技術標籤放最後
 - **部署自動化**：push 到 master 即觸發 GitHub Actions build + 部署到 GitHub Pages，約 40 秒上線，零維運成本
 - **內容後台**：Decap CMS（git-based）——網頁介面編輯作品與上傳圖片，儲存即 commit，不需要開編輯器

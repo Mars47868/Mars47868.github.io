@@ -25,10 +25,10 @@ const { title, summary, industry, tech, metric, github, demo } = project.data;
     </a>
 
     <header style="margin-bottom:2rem;">
-      <p style="font-family:var(--font-serif);font-size:36px;font-weight:500;color:var(--color-teal);line-height:1.3;margin-bottom:0.75rem;">
+      <p style="font-family:var(--font-head);font-size:34px;font-weight:700;letter-spacing:-0.02em;color:var(--color-teal);line-height:1.3;margin-bottom:0.75rem;">
         {metric}
       </p>
-      <h1 style="font-size:22px;font-weight:500;color:var(--color-text-primary);margin-bottom:0.75rem;line-height:1.4;">
+      <h1 style="font-family:var(--font-head);font-size:22px;font-weight:600;letter-spacing:-0.01em;color:var(--color-text-primary);margin-bottom:0.75rem;line-height:1.4;">
         {title}
       </h1>
       <p style="font-size:15px;color:var(--color-text-secondary);margin-bottom:1.25rem;line-height:1.7;">
@@ -54,12 +54,12 @@ const { title, summary, industry, tech, metric, github, demo } = project.data;
           )}
         </div>
       )}
-      <hr style="border:none;border-top:0.5px solid var(--color-border);" />
+      <hr style="border:none;border-top:1px solid var(--color-border);" />
     </header>
 
-    <div class="prose prose-stone max-w-none
-      prose-h2:font-serif prose-h2:text-xl prose-h2:font-medium prose-h2:mt-10 prose-h2:mb-4
-      prose-h2:pb-2 prose-h2:border-b prose-h2:border-[rgba(28,28,26,0.10)]
+    <div class="prose prose-stone dark:prose-invert max-w-none
+      prose-h2:text-xl prose-h2:font-semibold prose-h2:tracking-tight prose-h2:mt-10 prose-h2:mb-4
+      prose-h2:pb-2 prose-h2:border-b prose-h2:border-[var(--color-border)]
       prose-p:leading-relaxed prose-p:my-4 prose-p:text-[var(--color-text-secondary)]
       prose-li:my-1 prose-li:text-[var(--color-text-secondary)]
       prose-a:text-primary prose-a:no-underline hover:prose-a:underline

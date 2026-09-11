@@ -11,6 +11,7 @@ result: "把半小時的手動加總，壓縮成兩分鐘的整體視圖"
 problemLabel: "多帳戶分開登入逐筆加總，想看整體損益要花半小時"
 demo: "https://stock-dashboard-web-ann.pages.dev/"
 iconBg: "green"
+cover: "stockDashboard_overview.png"
 order: 5
 ---
 
