@@ -62,8 +62,9 @@ npm run cms
 
 | 路由 | 說明 |
 |------|------|
-| `/` | 首頁：Hero + 為什麼是我（#about）+ 精選/其他作品大圖卡（#cases，整卡連內頁）+ 工具箱（#skills）+ CTA（#contact） |
-| `/projects/[slug]` | 個別作品 Case Study 頁 |
+| `/` | 首頁：Hero + 為什麼是我（#about）+ 精選作品大圖卡（#cases）+「查看全部作品 →」+ 工具箱（#skills）+ CTA（#contact） |
+| `/projects` | 作品列表頁：精選作品 + 其他作品（同一種大圖卡分兩組），導覽列「作品」連到這裡 |
+| `/projects/[slug]` | 個別作品 Case Study 頁（「← 所有作品」返回列表） |
 | `/experience` | 經歷頁：時間軸倒序 + 量化成就 bullets（內容源自 CV）+ 工具箱 + CTA |
 | `/admin/` | Decap CMS 內容後台（本機模式：`npm run cms` + `npm run dev`，開 `localhost:4321/admin/index.html`；線上模式未啟用，需 OAuth proxy） |
 

@@ -10,7 +10,6 @@ import CTABlock from '../components/CTABlock.astro';
 const projects = await getCollection('projects');
 const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
 const featured = sorted.filter(p => p.data.featured);
-const others = sorted.filter(p => !p.data.featured);
 ---
 <BaseLayout title="陳睿凱 Mars · 流程自動化工程師">
   <div style="max-width:720px;margin:0 auto;padding:0 2rem 4rem;">
@@ -35,26 +34,7 @@ const others = sorted.filter(p => !p.data.featured);
           />
         ))}
       </div>
-
-      {others.length > 0 && (
-        <>
-          <p style="font-size:11px;letter-spacing:0.14em;text-transform:uppercase;color:var(--color-text-tertiary);margin:2.5rem 0 1.5rem;font-family:var(--font-mono);">
-            其他作品
-          </p>
-          <div class="project-grid">
-            {others.map(p => (
-              <ProjectCard
-                title={p.data.title}
-                summary={p.data.summary}
-                tech={p.data.tech}
-                slug={p.id}
-                iconBg={p.data.iconBg}
-                cover={p.data.cover}
-              />
-            ))}
-          </div>
-        </>
-      )}
+      <a href="/projects" class="all-projects-link">查看全部作品 →</a>
     </section>
 
     <Toolbox />
@@ -77,6 +57,15 @@ const others = sorted.filter(p => !p.data.featured);
     grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
+  .all-projects-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    color: var(--color-teal);
+    text-decoration: none;
+  }
+  .all-projects-link:hover { text-decoration: underline; }
   @media (max-width: 640px) {
     .project-grid { grid-template-columns: 1fr; }
   }

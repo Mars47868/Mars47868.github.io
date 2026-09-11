@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import CTABlock from '../../components/CTABlock.astro';
+
+const projects = await getCollection('projects');
+const sorted = [...projects].sort((a, b) => a.data.order - b.data.order);
+const featured = sorted.filter(p => p.data.featured);
+const others = sorted.filter(p => !p.data.featured);
+---
+<BaseLayout
+  title="作品 · 陳睿凱 Mars"
+  description="每個作品都是一個被解掉的問題:從發現流程裡的浪費,到讓它消失。">
+  <div style="max-width:760px;margin:0 auto;padding:0 2rem 2rem;">
+
+    <section class="proj-head">
+      <p class="section-label">作品 · Projects</p>
+      <h1 class="proj-headline">每個作品，<br />都是一個被解掉的問題。</h1>
+      <p class="proj-intro">
+        不從技術出發，從「誰的什麼流程在浪費時間」出發——
+        每個案例都寫清楚問題、思路、做法與結果。
+      </p>
+    </section>
+
+    <section class="proj-section">
+      <p class="section-label">精選作品</p>
+      <div class="project-grid">
+        {featured.map(p => (
+          <ProjectCard
+            title={p.data.title}
+            summary={p.data.summary}
+            tech={p.data.tech}
+            slug={p.id}
+            iconBg={p.data.iconBg}
+            cover={p.data.cover}
+          />
+        ))}
+      </div>
+
+      {others.length > 0 && (
+        <>
+          <p class="section-label" style="margin-top:2.5rem;">其他作品</p>
+          <div class="project-grid">
+            {others.map(p => (
+              <ProjectCard
+                title={p.data.title}
+                summary={p.data.summary}
+                tech={p.data.tech}
+                slug={p.id}
+                iconBg={p.data.iconBg}
+                cover={p.data.cover}
+              />
+            ))}
+          </div>
+        </>
+      )}
+    </section>
+
+    <CTABlock
+      heading="有類似的流程想讓它消失？"
+      desc="不管是作業流程、內容產出、還是每天消耗你時間的重複動作，我很樂意聽你說說。"
+      email="marschen82@gmail.com"
+      resume="/resume.pdf"
+    />
+
+  </div>
+</BaseLayout>
+
+<style>
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+  }
+  .proj-head { padding: 3rem 0 2rem; }
+  .proj-headline {
+    font-family: var(--font-head);
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--color-text-primary);
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  .proj-intro {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    line-height: 1.8;
+    max-width: 540px;
+  }
+  .proj-section {
+    padding: 0.5rem 0 2.5rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  @media (max-width: 640px) {
+    .project-grid { grid-template-columns: 1fr; }
+    .proj-head { padding: 2.2rem 0 1.6rem; }
+    .proj-headline { font-size: 25px; }
+  }
+</style>
