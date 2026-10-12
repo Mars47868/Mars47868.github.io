@@ -67,9 +67,11 @@ npm run cms
 | `/projects/[slug]` | 個別作品 Case Study 頁（「← 所有作品」返回列表） |
 | `/experience` | 經歷頁：時間軸倒序 + 量化成就 bullets（內容源自 CV）+ 工具箱 + CTA |
 | `/admin/` | Decap CMS 內容後台（本機模式：`npm run cms` + `npm run dev`，開 `localhost:4321/admin/index.html`；線上模式未啟用，需 OAuth proxy） |
+| `/404` | 自訂 404 頁（`src/pages/404.astro`，GitHub Pages 自動使用 `dist/404.html`） |
 
 - 無獨立 `/about`、`/contact` 頁，導覽列為首頁錨點連結 + `/experience`
-- 導覽列有「履歷 PDF」按鈕，連到 `/resume.pdf`（來源：`/Users/marschen/Desktop/personal_workspace/CV/cv-source/` 的 `陳睿凱_CV.pdf`，CV 更新後需重新複製）
+- 導覽列「履歷」連到 `/resume.pdf`（中文版），經歷頁 CTA 另有 `/resume-en.pdf`（英文版）。來源：`/Users/marschen/Desktop/personal_workspace/CV/<最新 YYYYMM>/` 的 `陳睿凱_CV.pdf` 與 `Mars_CV.pdf`；CV 更新後重新複製並以 md5 比對確認
+- CV 改版日誌在 `cv-source/NOTES.md`，經歷頁同步時先讀最新一節；寫作原則同樣適用網站：一間公司一個條目、進行中專案寫「主導＋預計上線時間」不寫完成式
 
 ---
 
@@ -78,13 +80,14 @@ npm run cms
 | slug | 工具名稱 | 產業 | 技術 | order |
 |------|---------|------|------|-------|
 | `podcast-notes` | Podcast 筆記自動化流程 | 個人知識管理、內容創作 | Python、faster-whisper、GAS、LINE API | 1 |
-| `aui` | 庫存表自動生成工具 | 製造業、供應鏈 | Python、CLI | 2 |
-| `holiday-orders` | 年節訂單報表彙整 | 餐飲業 | Excel VBA | 3 |
-| `quick-medication` | 快速用藥查詢工具 | 醫療診所 | Google Apps Script | 4 |
-| `stock-dashboard` | 股票資產監控台 | 個人財務 | GAS、Sheets、Chart.js、Cloudflare Pages | 5 |
-| `video-notes` | 影片轉錄與摘要工具 | 內容創作 | Python、faster-whisper、FFmpeg | 6 |
-| `maoutseng` | 食品貿易商官網重建 | 食品貿易、B2B | PHP、Laravel 11、MySQL | 7 |
-| `portfolio-site` | 個人作品集網站（本站） | 個人品牌 | Astro、GitHub Actions、Decap CMS | 8 |
+| `admin-platform` | 後台管理與商品管理平台 | 接案後台（NDA 匿名，不寫客戶名與產業別） | Java、Spring Boot、jOOQ、MariaDB | 2 |
+| `aui` | 庫存表自動生成工具 | 製造業、供應鏈 | Python、CLI | 3 |
+| `holiday-orders` | 年節訂單報表彙整 | 餐飲業 | Excel VBA | 4 |
+| `quick-medication` | 快速用藥查詢工具 | 醫療診所 | Google Apps Script | 5 |
+| `stock-dashboard` | 股票資產監控台 | 個人財務 | GAS、Sheets、Chart.js、Cloudflare Pages | 6 |
+| `video-notes` | 影片轉錄與摘要工具 | 內容創作 | Python、faster-whisper、FFmpeg | 7 |
+| `maoutseng` | 食品貿易商官網重建 | 食品貿易、B2B | PHP、Laravel 11、MySQL | 8 |
+| `portfolio-site` | 個人作品集網站（本站） | 個人品牌 | Astro、GitHub Actions、Decap CMS | 9 |
 
 新增作品時，需同步在 `src/lib/projectIcons.ts` 加入對應 slug 的幾何 SVG icon（stroke-width 1.6、round cap 風格）。
 
@@ -153,7 +156,9 @@ order: 1               # 首頁排序
 - 首頁以 frontmatter `featured: true` 分「精選作品」「其他作品」兩組，同一種卡片
 - Before/Think/After 三段條顯示在**作品內頁** header 下方（`[slug].astro` 的 `.journey`），首頁不再有手風琴
 - 每個頁面底部需有 CTA（email 聯絡引導）
-- OG 圖：`public/og-default.png`（1200×630，用 headless Chrome 渲染 HTML 產生）；`BaseLayout.astro` 的 `siteUrl` 為 `https://mars47868.github.io`
+- OG 圖：`public/og-default.png`（1200×630，用 headless Chrome 渲染 HTML 產生）；`BaseLayout.astro` 的 `siteUrl` 為 `https://mars47868.github.io`。作品內頁有 `cover` 時自動以 `getImage` 轉成 1200×630 jpg 當 OG 圖
+- SEO：`@astrojs/sitemap` 產生 `sitemap-index.xml`（排除 404 與 admin），每頁有 `canonical`
+- 工具箱（`Toolbox.astro`）只列 CV「技術能力」與站上作品實際用到的技術，不列無佐證項目；CV 更新後同步檢查
 
 ---
 
@@ -167,6 +172,7 @@ order: 1               # 首頁排序
 |------|------|
 | 開發進度 | `tasks/todo.md` |
 | 網站進化評估（更新項目清單） | `docs/superpowers/specs/2026-09-10-site-evolution-assessment.md` |
+| CV 同步檢查與優化建議（2026-10） | `docs/superpowers/specs/2026-10-12-cv-sync-and-site-review.md` |
 | 作品彙整原始資料 | `docs/工具彙整.md` |
 | 設計規格 | `docs/superpowers/specs/2026-04-24-portfolio-website-design.md` |
 | 履歷原始資料（最新） | `/Users/marschen/Desktop/personal_workspace/CV/cv-source/cv-zh.html` |
