@@ -1,20 +1,25 @@
 ---
+// 工具箱只列 CV「技術能力」與站上作品實際用到的技術，不列無佐證項目（CV 更新後同步檢查）
 const groups = [
   {
-    label: '後端 / 系統',
-    items: ['Java', 'Spring Boot', 'Redis', 'RabbitMQ', 'Docker', 'MySQL', 'ClickHouse'],
+    label: '後端',
+    items: ['Java', 'Spring Boot', 'Spring Security', 'Spring Data JPA', 'jOOQ', 'Java EE / JSF', 'PHP / Laravel', 'JUnit / PHPUnit / pytest'],
   },
   {
-    label: 'AI / 自動化',
-    items: ['Python', 'OpenAI API', 'Whisper', 'LangChain', 'Line API'],
+    label: '資料與平台',
+    items: ['MySQL / MariaDB', 'Oracle', 'SQL Server', 'ClickHouse', 'Redis', 'Memcached', 'Docker', 'Kubernetes', 'Tomcat / Nginx', 'GitHub Actions', 'Git / Bitbucket'],
   },
   {
     label: '前端',
-    items: ['React', 'Vue', 'Angular', 'HTML / CSS'],
+    items: ['Angular', 'TypeScript', 'JavaScript', 'SCSS / CSS', 'jQuery', 'Astro'],
   },
   {
-    label: '產品 / 流程',
-    items: ['需求訪談', '流程分析', 'CI/CD', '敏捷開發', 'Git'],
+    label: 'AI 與自動化',
+    items: ['Python', 'faster-whisper', 'FFmpeg', 'LLM 校稿與摘要', 'Google Apps Script', 'LINE Messaging API', 'Excel VBA'],
+  },
+  {
+    label: '產品與流程',
+    items: ['需求訪談', '流程分析', '規格制定與驗收', '技術評估與風險說明', 'CI/CD'],
   },
 ];
 ---
@@ -52,6 +57,8 @@ const groups = [
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
+  /* 奇數個群組時，最後一格橫跨兩欄避免落單 */
+  .skill-group:last-child:nth-child(odd) { grid-column: 1 / -1; }
   .skill-group {
     padding: 14px 16px;
     border: 1px solid var(--color-border);
@@ -78,5 +85,6 @@ const groups = [
   }
   @media (max-width: 600px) {
     .skills-grid { grid-template-columns: 1fr; }
+    .skill-group:last-child:nth-child(odd) { grid-column: auto; }
   }
 </style>
