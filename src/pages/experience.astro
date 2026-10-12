@@ -10,10 +10,11 @@ const timeline = [
     org: '双引資訊 · 台北',
     context: '軟體顧問公司，主要客戶為台北富邦銀行；任內交付橫跨九個銀行系統。',
     bullets: [
-      '<strong>主導信託簽署系統後台</strong>：覆核簽核流程、契據差異比對、ESB SOAP 介接、欄位級加密與 LDAP 認證。',
-      '個資禁查戶檢核從名單入檔排程做到申辦流程攔截，橫跨兩套不共用程式碼的技術棧、<strong>五條申辦流程</strong>；同期把身分驗證的 OTP 升級為 RFC 6238 TOTP。',
-      '銀行官網基金專區去 iframe 化，收斂後消除 <strong>28 處重複資源引用、7 次重複 API 呼叫</strong>。',
-      '擔任資安弱點修補技術窗口：滲透測試與弱掃報告逐項對照原始碼查證，剔除誤判後提出修復方式與影響範圍供客戶決策。',
+      '<strong>架構改造與平台移轉</strong>：主導信用卡特約商店系統（前後台）脫離無法承載 Spring Boot 3 / 4 的 IBM WAS 9，移轉至雙節點內嵌 Tomcat 11，同步升級 Java 8 → 17、Spring Boot 2.7 → 4.1；PoC 階段已根因修復 <strong>18 個升版問題</strong>，其中 8 個能正常編譯啟動、卻會靜默改變畫面或行為，並以原始碼抽出的 278 個端點做升版前後自動比對。<span class="tl-tag">進行中 · 預計 2026 年底上線</span>',
+      '<strong>上雲與 Kubernetes</strong>：主導公庫系統（前後台）由地端 WAS 移轉至行內容器平台，Spring Boot 由 1.5 / 2.7 升級至 3 以上；評估階段以位元碼分析閉源元件共 <strong>15,242 個類別</strong>，將 jakarta 相容風險收斂到 2 處未使用的程式碼。另完成信用卡優惠網（Kubernetes 多 Pod）Spring Boot 4.1.1 升版，處理 3 個單一 Pod 測不出來的相容性問題。<span class="tl-tag">進行中 · 預計 2026 年底上線</span>',
+      '<strong>銀行系統主導</strong>：主導信託簽署系統後台之開發與維運，獨立實作覆核簽核流程、契據差異比對、ESB SOAP 介接、欄位級加密與 LDAP 認證。',
+      '<strong>法遵與資安交付</strong>：個資禁查戶檢核從名單入檔排程一路實作到申辦流程攔截點，橫跨 Spring Boot 微服務與 Java EE 兩套不共用程式碼的技術棧、共 <strong>五條申辦流程</strong>；同期將身分驗證的 OTP 升級為 RFC 6238 TOTP，金鑰改由資料庫託管。',
+      '<strong>技術窗口與需求評估</strong>：擔任客戶端資安弱點修補的技術窗口，滲透測試與弱掃報告逐項對照原始碼查證是否真的適用，剔除誤判與重複項後提出修復方式與影響範圍供客戶決策。',
     ],
     pivot: false,
   },
@@ -49,10 +50,20 @@ const timeline = [
     pivotNote: '職涯轉折點——從「定義問題的人」變成「動手解掉問題的人」',
   },
   {
-    date: '2019.10 – 2022.08',
+    date: '2022.05 – 2022.08',
+    role: 'APP 產品經理',
+    org: '友訊科技 D-Link · 台北',
+    context: '網通大廠。',
+    bullets: [
+      '跨產品中心與多個部門協調 App 產品開發與上市。',
+    ],
+    pivot: false,
+  },
+  {
+    date: '2019.10 – 2022.05',
     role: '產品經理',
-    org: '亞果元素國際 → 友訊科技 D-Link · 台北',
-    context: '消費電子配件品牌與網通大廠。',
+    org: '亞果元素國際 · 台北',
+    context: '消費電子配件品牌，銷售通路涵蓋全球零售市場。',
     bullets: [
       '負責佔公司<strong>約 40% 營收</strong>的核心產品線；2021 年主導 <strong>8 條產品線上市</strong>，帶動 <strong>35% 年營收成長</strong>。',
       '跨研發、設計、供應鏈與生產規劃執行規格制定與驗收——現在跟客戶談需求、訂驗收標準的能力就是這裡練的。',
@@ -71,8 +82,8 @@ const timeline = [
       <h1 class="exp-headline">從產品經理到後端工程師，<br />中間沒有斷點。</h1>
       <p class="exp-intro">
         3 年 PM 帶產品線上市，再花半年全職轉職，接著 3 年以上在電信、醫療、金融三個
-        資料敏感產業寫正式環境的系統。兩條能力主軸：金融業的法遵與資安交付，
-        以及大規模資料下的效能優化。
+        資料敏感產業寫正式環境的系統。兩條能力主軸：銀行舊系統現代化（Spring Boot 4 升版、
+        脫離 IBM WAS 的平台移轉、上雲），以及金融業的法遵與資安交付。
       </p>
     </section>
 
@@ -102,6 +113,7 @@ const timeline = [
       desc="履歷 PDF 一鍵下載，或直接看我實際解決過的問題。"
       email="marschen82@gmail.com"
       resume="/resume.pdf"
+      resumeEn="/resume-en.pdf"
     />
 
   </div>
@@ -227,9 +239,24 @@ const timeline = [
     padding: 3px 12px;
     margin-top: 6px;
   }
+  /* 進行中專案標記：琥珀色，兩主題皆有 token */
+  .tl-bullets li :global(.tl-tag) {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    line-height: 1.6;
+    color: var(--color-amber);
+    background: var(--color-amber-light);
+    border-radius: 100px;
+    padding: 1px 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
 
   @media (max-width: 600px) {
     .exp-head { padding: 2.2rem 0 1.6rem; }
     .exp-headline { font-size: 25px; }
+    .tl-bullets li { font-size: 14px; }
   }
 </style>
