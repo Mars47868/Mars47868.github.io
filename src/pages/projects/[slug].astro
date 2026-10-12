@@ -1,5 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TagPill from '../../components/TagPill.astro';
 import CTABlock from '../../components/CTABlock.astro';
@@ -14,10 +16,20 @@ export async function getStaticPaths() {
 
 const { project } = Astro.props;
 const { Content } = await render(project);
-const { title, summary, industry, tech, metric, github, demo, before, think, after } = project.data;
+const { title, summary, industry, tech, metric, github, demo, before, think, after, cover } = project.data;
+
+// 作品內頁 OG 圖：有 cover 就轉成 1200×630 jpg，無則交給 BaseLayout 預設圖
+const images = import.meta.glob<{ default: ImageMetadata }>(
+  '../../assets/projects/*.{png,jpg,jpeg,webp}',
+  { eager: true }
+);
+const coverImg = cover ? images[`../../assets/projects/${cover}`]?.default : undefined;
+const ogImage = coverImg
+  ? (await getImage({ src: coverImg, width: 1200, height: 630, fit: 'cover', format: 'jpg', quality: 82 })).src
+  : undefined;
 ---
 
-<BaseLayout title={title} description={summary}>
+<BaseLayout title={title} description={summary} ogImage={ogImage}>
   <article style="max-width:720px;margin:0 auto;padding:3rem 2rem 4rem;">
 
     <a href="/projects" style="display:inline-flex;align-items:center;gap:6px;font-size:13px;color:var(--color-text-tertiary);text-decoration:none;margin-bottom:2rem;font-family:var(--font-mono);">
@@ -122,6 +134,7 @@ const { title, summary, industry, tech, metric, github, demo, before, think, aft
   .step-text { font-size: 12.5px; line-height: 1.65; color: var(--color-text-primary); }
   @media (max-width: 600px) {
     .journey { grid-template-columns: 1fr; }
+    .step-text { font-size: 14px; }
   }
 
   /* 內文圖片與正文同寬;小於欄寬的圖維持原尺寸不放大(避免模糊) */

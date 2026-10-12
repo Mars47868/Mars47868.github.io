@@ -14,7 +14,7 @@
     "cms": "decap-server"
   },
   "dependencies": {
-    "@fontsource-variable/inter": "^5.2.8",
+    "@astrojs/sitemap": "^3.7.4",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.2.4",
     "astro": "^6.1.9",

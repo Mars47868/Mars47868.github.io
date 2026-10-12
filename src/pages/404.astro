@@ -1,0 +1,69 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="找不到頁面 · Mars Chen" description="這個頁面不存在，可能是連結打錯或已搬家。">
+  <div class="nf">
+    <p class="nf-label">404 · Not Found</p>
+    <h1 class="nf-headline">這條路不通。</h1>
+    <p class="nf-desc">可能是連結打錯，或這個頁面已經搬家。</p>
+    <div class="nf-links">
+      <a href="/" class="nf-btn nf-btn-primary">回首頁</a>
+      <a href="/projects" class="nf-btn nf-btn-secondary">看作品 →</a>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .nf {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 6rem 2rem 8rem;
+  }
+  .nf-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    margin-bottom: 1.4rem;
+  }
+  .nf-headline {
+    font-family: var(--font-head);
+    font-size: 34px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text-primary);
+    margin-bottom: 1rem;
+  }
+  .nf-desc {
+    font-size: 15px;
+    color: var(--color-text-secondary);
+    margin-bottom: 2rem;
+  }
+  .nf-links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .nf-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 9px 18px;
+    border-radius: var(--radius-md);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all var(--transition);
+  }
+  .nf-btn-primary {
+    background: var(--color-teal);
+    color: var(--color-on-accent);
+    border: 1px solid var(--color-teal);
+  }
+  .nf-btn-primary:hover { background: var(--color-teal-mid); border-color: var(--color-teal-mid); }
+  .nf-btn-secondary {
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-mid);
+  }
+  .nf-btn-secondary:hover { color: var(--color-teal); border-color: var(--color-teal); }
+  @media (max-width: 600px) {
+    .nf { padding: 4rem 2rem 6rem; }
+    .nf-headline { font-size: 28px; }
+  }
+</style>

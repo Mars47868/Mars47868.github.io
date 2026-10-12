@@ -15,6 +15,7 @@ const {
 } = Astro.props;
 
 const siteUrl = 'https://mars47868.github.io';
+const year = new Date().getFullYear();
 ---
 <!DOCTYPE html>
 <html lang="zh-TW" class="scroll-smooth">
@@ -27,6 +28,8 @@ const siteUrl = 'https://mars47868.github.io';
     <meta property="og:image" content={`${siteUrl}${ogImage}`} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={`${siteUrl}${Astro.url.pathname}`} />
+    <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
@@ -83,7 +86,7 @@ const siteUrl = 'https://mars47868.github.io';
     </main>
 
     <footer class="site-footer">
-      <div>MARS CHEN · TAIPEI · 2026</div>
+      <div>MARS CHEN · TAIPEI · {year}</div>
     </footer>
 
   </body>
@@ -101,7 +104,8 @@ const siteUrl = 'https://mars47868.github.io';
     padding: 0 2rem;
   }
   .site-header-inner {
-    max-width: 760px;
+    /* 內容容器為 720px 含左右 2rem padding，header 外層已有 2rem padding，故內層取 720 − 64 = 656 讓 logo 與內文左緣對齊 */
+    max-width: 656px;
     margin: 0 auto;
     display: flex;
     align-items: center;

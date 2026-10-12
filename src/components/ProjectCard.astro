@@ -34,7 +34,7 @@ const coverImg = cover ? images[`../assets/projects/${cover}`]?.default : undefi
     <div class="pcard-tags">
       {tech.slice(0, 3).map(t => <span class="pcard-tag">{t}</span>)}
     </div>
-    <p class="pcard-title">{title}</p>
+    <h3 class="pcard-title">{title}</h3>
     <p class="pcard-sum">{summary}</p>
     <span class="pcard-link">查看案例 →</span>
   </div>
@@ -125,5 +125,8 @@ const coverImg = cover ? images[`../assets/projects/${cover}`]?.default : undefi
     font-family: var(--font-mono);
     font-size: 12px;
     color: var(--color-teal);
+  }
+  @media (max-width: 600px) {
+    .pcard-sum { font-size: 14px; }
   }
 </style>
