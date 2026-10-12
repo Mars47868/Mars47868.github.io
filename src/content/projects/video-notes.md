@@ -12,7 +12,7 @@ problemLabel: "課程影片沒有文字整理，複習只能重播，謄稿又�
 iconBg: "blue"
 cover: "videoNotes_GUI.png"
 featured: true
-order: 6
+order: 7
 ---
 
 ## 問題背景

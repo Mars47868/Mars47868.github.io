@@ -13,7 +13,7 @@ demo: "https://stock-dashboard-web-ann.pages.dev/"
 iconBg: "green"
 cover: "stockDashboard_overview.png"
 featured: true
-order: 5
+order: 6
 ---
 
 ## 問題背景

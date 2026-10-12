@@ -11,7 +11,7 @@ result: "把每週一小時的手動報表整理，壓縮成一行指令與五�
 problemLabel: "每週報表手動整理，穩定耗費一小時"
 iconBg: "green"
 cover: "aui_cli.png"
-order: 2
+order: 3
 ---
 
 ## 問題背景

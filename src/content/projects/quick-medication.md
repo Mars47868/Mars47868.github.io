@@ -11,7 +11,7 @@ result: "把散落在全院系統裡的個人用藥邏輯，整理成一個秒�
 problemLabel: "全院共用清單，找自己的處方比看診還費時"
 iconBg: "blue"
 cover: "quickMedication_app.png"
-order: 4
+order: 5
 ---
 
 ## 問題背景
